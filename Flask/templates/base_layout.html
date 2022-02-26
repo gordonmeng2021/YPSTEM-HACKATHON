@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+
+        <!-- Blocks are expected to be overriden -->
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='base_layout.css')}}" />
+        {% block stylesheet %}{% endblock %}
+    </head>
+
+    <body>
+        <div class="navbar">
+            <span class="navbar-name">Queena Wong</span>
+            <span class="navbar-right">
+                <a href="{{ url_for('home') }}" class="navbar-brand">Home</a> 
+                <a href="{{ url_for('about') }}" class="navbar-item">About</a>
+                <a href="{{ url_for('project') }}" class="navbar-item">Projects</a>
+                <a href="{{ url_for('contact') }}" class="navbar-item">Contact</a>
+            </span>
+        </div>
+
+        <div class="body-content">
+            {% block content %}
+            {% endblock %}
+            <hr/>
+            <footer>
+                <p>© 2021</p>
+            </footer>
+        </div>
+    </body>
+</html>
