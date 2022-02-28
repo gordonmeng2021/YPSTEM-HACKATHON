@@ -36,6 +36,7 @@ notfocusedTime = 0
 
 @app.route("/focuz")
 def focuz():
+    flash("You have started FOCUZ","info")
     face_cascade = cv2.CascadeClassifier('Flask/haarcascade_frontalface_default.xml')
     cap = cv2.VideoCapture(0)
 
@@ -80,6 +81,8 @@ def focuz():
             k = cv2.waitKey(1) & 0xff
             if k==27:
                 break
+    
+    
     
     run()
     # print("You have focused :", str(int(focusedTime)),'s')
