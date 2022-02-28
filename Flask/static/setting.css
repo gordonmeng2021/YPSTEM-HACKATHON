@@ -204,7 +204,11 @@ body{
 .card-body {
   flex: 1 1 auto;
   min-height: 1px;
-  padding: 1rem;
+  padding: 1.5rem;
+}
+
+.user-info-card h6 {
+  line-height: 1.5em;
 }
 
 .gutters-sm {
@@ -228,4 +232,45 @@ body{
 }
 .shadow-none {
   box-shadow: none!important;
+}
+
+.settings-input {
+  border: none;
+}
+
+.settings-input:focus {
+  border: black;
+}
+
+.website-list-item {
+  height: 2em;
+  font-size: 17px;
+  position: relative;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.website-list-item button {
+  position: absolute;
+  right: 0;
+  font-size: 15px;
+}
+
+.website-add-list {
+  margin-top: 40px;
+}
+
+.website-add-list input {
+  width: 75%;
+  display: inline;
+  margin-right: 5%;
+}
+
+.website-add-list button {
+  width: 19%;
+  position: absolute;
+}
+
+hr {
+  margin: 0.5em;
 }

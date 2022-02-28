@@ -18,6 +18,10 @@ import cv2
 from threading import *
 import time
 
+@app.route("/")
+def unloggedin():
+    return render_template("unloggedin.html")
+
 @app.route("/home/")
 def home():
     # print("helllloooooo")
@@ -90,9 +94,14 @@ def luckydraw():
 
 @app.route("/setting/")
 def setting():
-    return render_template("setting.html")
+    username = "imcoolthanks"
+    email = "queena1234@gmail.com"
+    pw = "1234"
+    website = get_blocked_website_list(email)
+    print(website)
+    return render_template("setting.html", username=username, email=email, password=pw, website=website)
 
-@app.route("/")
+
 @app.route("/login/", methods = ['POST', 'GET'])
 def login():
     if request.method == 'POST':
