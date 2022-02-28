@@ -4,7 +4,7 @@ from datetime import datetime
 from sys import flags
 
 
-from flask import Flask, redirect, render_template, url_for,flash
+from flask import Flask, redirect, render_template, request, url_for,flash
 
 from . import app
 
@@ -36,6 +36,10 @@ notfocusedTime = 0
 
 @app.route("/focuz")
 def focuz():
+    def showmsg():
+        
+        flash("You have started FOCUZ","info")
+        return render_template("home.html")
     
    
     face_cascade = cv2.CascadeClassifier('Flask/haarcascade_frontalface_default.xml')
@@ -84,16 +88,17 @@ def focuz():
                 break
     
     
-    
+    showmsg()
     run()
     # print("You have focused :", str(int(focusedTime)),'s')
     # print("You have not focused :", str(int(notfocusedTime)),'s')  
     return "Get back to continue"
 
-@app.route("/showmsg")
-def showmsg():
-    flash("You have started FOCUZ","info")
-    return render_template("home.html")
+# @app.route("/showmsg")
+# def showmsg():
+    
+#     flash("You have started FOCUZ","info")
+#     return render_template("home.html")
     
 @app.route("/stop")
 def stop():
