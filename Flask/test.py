@@ -1,40 +1,9 @@
-#Contains the routings and the view functions
-import re
-from datetime import datetime
-
-from flask import Flask, render_template
-
-from . import app
-
-#database
 import sqlite3 as sql
 
 #Plot graph imports
 import datetime as DT
 import matplotlib.pyplot as plt
 
-@app.route("/")
-@app.route("/home/")
-def home():
-    return render_template("home.html")
-
-@app.route("/test/")
-def test():
-    print("helllloooooo")
-    
-
-@app.route("/luckydraw/")
-def luckydraw():
-    return render_template("luckydraw.html")
-
-@app.route("/setting/")
-def setting():
-    return render_template("setting.html")
-
-
-
-
-#-------------------- DATABASE FUNCTIONS -----------------------
 #USER INFO
 def create_users_info():
     #Create database file/connect to it
@@ -86,7 +55,6 @@ def sign_up(username, email, password):
 
     conn.commit()
     conn.close()
-
 
 #BLOCKED WEBSITE
 def create_blocked_website():
