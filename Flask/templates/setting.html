@@ -31,7 +31,6 @@ Settings
         </div>
         <!-- Profile Settings-->
         <div class="col-lg-8 pb-5">
-            <form class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-fn">First Name</label>
@@ -66,18 +65,25 @@ Settings
                 
                     </div>
                 </div>
-            </form>
+       
 
-            <form action="{{ url_for('setting') }}" method="post">
+            <form action="/setting" method="POST">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="account-phone">Input Website You Would Like to Block</label>
-                        <input name = "website" class="form-control" type="text" id="website" value="www.amazon.com" required="">
+                        <label for="account-phone">Input Website You Would Like to Block When Focusing</label>
+                        <input name = "website" class="form-control" type="text" id="website" placeholder="www.amazon.com" >
                     </div>
+                    <br/>
+                    <button name = "add_website" class="btn btn-style-1 btn-primary" type="submit" >Add Website</button>
                 </div>
-                <br>
-                <button name = "add_website" class="btn btn-style-1 btn-primary" type="submit" >Add Website</button>
             </form>
+
+            <br/><br/>
+            {% for url_list in website %}
+            <tr>
+                <td>{{url_list[0]}}</td>
+            </tr>
+            {% endfor %}
         </div>
     </div>
 </div>

@@ -1,10 +1,9 @@
 #Contains the routings and the view functions
-import re
-from datetime import datetime
+from doctest import OutputChecker
 
 
-from flask import Flask, render_template
 
+from flask import Flask, render_template, request, redirect
 from . import app
 
 #database
@@ -93,7 +92,37 @@ def luckydraw():
 def setting():
     return render_template("setting.html")
 
+#Get block website info
+#Hostpath
+hostsPath = r"C:\Windows\System32\drivers\etc\hosts"
+reroute = "127.0.0.1"
 
+
+@app.route('/setting', methods = ["POST", "GET"])
+def add_website():
+    if request.method == "POST":
+        new_website = request.form['website']
+
+        add_blocked_website("queena1234@gmail.com",new_website)
+
+        with open(hostsPath, 'r+') as file:
+            content = file.read()
+            for site in get_blocked_website_list("queena1234@gmail.com"):
+                if site in content:
+                    pass
+                else:
+                    file.write(reroute + " " + site + "\n")
+            return redirect("/setting")
+    else:
+        website = get_blocked_website_list("queena1234@gmail.com")
+        return render_template("setting.html", website = website)
+
+
+
+    
+            
+            
+    
 
 
 #-------------------- DATABASE FUNCTIONS -----------------------
