@@ -36,7 +36,8 @@ notfocusedTime = 0
 
 @app.route("/focuz")
 def focuz():
-    flash("You have started FOCUZ","info")
+    
+   
     face_cascade = cv2.CascadeClassifier('Flask/haarcascade_frontalface_default.xml')
     cap = cv2.VideoCapture(0)
 
@@ -89,8 +90,14 @@ def focuz():
     # print("You have not focused :", str(int(notfocusedTime)),'s')  
     return "Get back to continue"
 
+@app.route("/showmsg")
+def showmsg():
+    flash("You have started FOCUZ","info")
+    return render_template("home.html")
+    
 @app.route("/stop")
 def stop():
+    
     global state
     state=False
     flash("You have stopped FOCUZ","info")
