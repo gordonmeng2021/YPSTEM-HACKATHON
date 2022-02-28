@@ -58,11 +58,11 @@ Home
         <!-- <h6>focusing state</h6> -->
         <!-- button -->
         <form  action="/focuz"  method="get"> <div class="wrap"><form action="/showmsg" method="get">
-          <button class="button1" >FOCUZ!</button>
+          <button onclick="myFunc()"class="button1" >FOCUZ!</button>
         </div></form>
         </form>
         <form action="/stop" method="get"> <div class="wrap">
-          <button class="button3" >STOP!</button>
+          <button  class="button3" >STOP!</button>
         </div>
         </form>
        
@@ -166,7 +166,10 @@ Home
   </div>
 </section>
 
-
+<script>function myFunc(){
+  window.alert("You have started FOCUZ");
+}</script>
 </body>
+
 
 {% endblock %}
