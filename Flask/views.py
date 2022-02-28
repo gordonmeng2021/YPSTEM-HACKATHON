@@ -25,10 +25,15 @@ def home():
     # print("helllloooooo")
     return render_template("home.html")
 
-#open focusing function
+#---------------------------------open focusing function
+
 state= True
+
+#*******the time they focus
+
 focusedTime = 0
-notfocusedTime =0
+notfocusedTime = 0
+
 @app.route("/focuz")
 def focuz():
     face_cascade = cv2.CascadeClassifier('Flask/haarcascade_frontalface_default.xml')
