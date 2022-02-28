@@ -1,16 +1,8 @@
 #Contains the routings and the view functions
-<<<<<<< HEAD
-from doctest import OutputChecker
-
-
-=======
 import re
 from datetime import datetime
 from sys import flags
-
-
 from flask import Flask, render_template,flash
->>>>>>> 6677cb7c8687b8510af5e5a8a6484260c790aee7
 
 from flask import Flask, render_template, request, redirect
 from . import app
@@ -143,9 +135,11 @@ def add_website():
                     pass
                 else:
                     file.write(reroute + " " + site + "\n")
+                    flash(get_blocked_website_list("queena1234@gmail.com"))
             return redirect("/setting")
     else:
         website = get_blocked_website_list("queena1234@gmail.com")
+        flash(get_blocked_website_list("queena1234@gmail.com"))
         return render_template("setting.html", website = website)
 
 

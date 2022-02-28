@@ -75,13 +75,14 @@ Settings
                     </div>
                     <br/>
                     <button name = "add_website" class="btn btn-style-1 btn-primary" type="submit" >Add Website</button>
+
                 </div>
             </form>
 
             <br/><br/>
-            {% for url_list in website %}
+            {% for url in website %}
             <tr>
-                <td>{{url_list[0]}}</td>
+                <td>{{website[0]}}</td>
             </tr>
             {% endfor %}
         </div>
