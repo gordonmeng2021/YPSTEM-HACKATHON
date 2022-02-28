@@ -1,10 +1,10 @@
 #Contains the routings and the view functions
 import re
 from datetime import datetime
-
+from sys import flags
+from flask import Flask, render_template,flash
 
 from flask import Flask, render_template, request, redirect
-
 from . import app
 
 #database
@@ -27,10 +27,15 @@ def home():
     # print("helllloooooo")
     return render_template("home.html")
 
-#open focusing function
-state= True
+#---------------------------------open focusing function
+#*******the time they focus
+
+focusedTime = 0
+notfocusedTime = 0
+
 @app.route("/focuz")
 def focuz():
+     
     face_cascade = cv2.CascadeClassifier('Flask/haarcascade_frontalface_default.xml')
     cap = cv2.VideoCapture(0)
 
@@ -40,9 +45,11 @@ def focuz():
     
       
     def run():
+        
         global isFocus,focusedTime,notfocusedTime,state
-        focusedTime = 0
-        notfocusedTime =0
+        state= True
+        
+        
             
         while state:
              
@@ -77,22 +84,37 @@ def focuz():
             if k==27:
                 break
     
-    run()
     
+    # showmsg()
+    run()
+    # print("You have focused :", str(int(focusedTime)),'s')
+    # print("You have not focused :", str(int(notfocusedTime)),'s')  
     return "Get back to continue"
 
-@app.route("/test")
-def test():
-    global state
+# @app.route("/showmsg")
+# def showmsg():
+    
+#     flash("You have started FOCUZ","info")
+#     return render_template("home.html")
+    
+@app.route("/stop")
+def stop():
+    
+    global state,focusedTime,notfocusedTime
     state=False
-    return "You stopped FOCUZ"
+    flash("You have stopped FOCUZ","info")
+    flash("You have focused : "+ str(int(focusedTime))+'s')
+    flash("You have not focused : "+ str(int(notfocusedTime))+'s')
+    focusedTime=0
+    notfocusedTime=0  
+    return render_template("home.html")
 
 
-@app.route("/luckydraw/")
+@app.route("/luckydraw")
 def luckydraw():
     return render_template("luckydraw.html")
 
-@app.route("/setting/")
+@app.route("/setting")
 def setting():
     username = "imcoolthanks"
     email = "queena1234@gmail.com"
@@ -122,7 +144,39 @@ def login():
     
     
 
+#Get block website info
+#Hostpath
+hostsPath = r"C:\Windows\System32\drivers\etc\hosts"
+reroute = "127.0.0.1"
 
+
+@app.route('/setting', methods = ["POST", "GET"])
+def add_website():
+    if request.method == "POST":
+        new_website = request.form['website']
+
+        add_blocked_website("queena1234@gmail.com",new_website)
+
+        with open(hostsPath, 'r+') as file:
+            content = file.read()
+            for site in get_blocked_website_list("queena1234@gmail.com"):
+                if site in content:
+                    pass
+                else:
+                    file.write(reroute + " " + site + "\n")
+                    flash(get_blocked_website_list("queena1234@gmail.com"))
+            return redirect("/setting")
+    else:
+        website = get_blocked_website_list("queena1234@gmail.com")
+        flash(get_blocked_website_list("queena1234@gmail.com"))
+        return render_template("setting.html", website = website)
+
+
+
+    
+            
+            
+    
 
 
 #-------------------- DATABASE FUNCTIONS -----------------------
@@ -385,3 +439,8 @@ def reset_database():
     create_focus_time()
     create_users_info()
     list_all()
+
+
+
+
+    
