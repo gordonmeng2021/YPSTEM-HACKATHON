@@ -10,6 +10,19 @@ Home
 
 {% block content %}
 <body>
+  
+  <div id="msgcontainer">
+  {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for msg in messages %}
+            
+              <div id="stopmsg" >{{msg}}</div>
+        
+                
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+      </div>
   <section class="-md -sm -xl -xs u-clearfix u-image u-shading u-section-5" src="" id="carousel_3cd6">
     <div class="u-clearfix u-sheet u-sheet-1">
       <div alt="" class="u-border-no-bottom u-border-no-left u-border-no-right u-border-no-top u-image u-image-circle u-image-1"></div>
@@ -17,16 +30,6 @@ Home
         <div class="u-container-layout u-valign-middle u-container-layout-1">
           <h2 class="u-align-center u-text u-text-body-color u-text-1">User Name</h2>
           <p class="u-align-center u-text u-text-body-color u-text-2">subject, form, class</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="u-clearfix u-image u-section-6" id="carousel_5099">
-    <div class="u-clearfix u-sheet u-sheet-1">
-      <div class="u-align-center u-container-style u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-group u-group-1">
-        <div class="u-container-layout u-valign-middle u-container-layout-1">
-          <p class="u-text u-text-1">"Focuz is the most tool that help you focus, use it and it is very good. Will you marry me?"</p>
-          <p class="u-text u-text-2">Start focuz !!!!!</p>
         </div>
       </div>
     </div>
@@ -51,14 +54,15 @@ Home
         <br>
         <br>
         <br>
-        <h6>focusing state</h6>
+        
+        <!-- <h6>focusing state</h6> -->
         <!-- button -->
-        <form action="/focuz" method="get"> <div class="wrap">
-          <button class="button1" >FOCUZ!</button>
-        </div>
+        <form  action="/focuz"  method="get"> <div class="wrap"><form action="/showmsg" method="get">
+          <button onclick="myFunc()"class="button1" >FOCUZ!</button>
+        </div></form>
         </form>
-        <form action="/test" method="get"> <div class="wrap">
-          <button class="button3" >STOP!</button>
+        <form action="/stop" method="get"> <div class="wrap">
+          <button  class="button3" >STOP!</button>
         </div>
         </form>
        
@@ -80,9 +84,10 @@ Home
         <p class="u-text u-text-2">You can block to prevent bla  bla bla bla.</p>
 
         <!-- block website navigation -->
-        <div class="wrap">
+        <form action="/setting" method="get"><div class="wrap">
           <button class="button2">Block Website</button>
-        </div>
+        </div></form>
+        
         </p>
       </div>
     </div>
@@ -118,9 +123,10 @@ Home
               <div class="u-align-center u-container-style u-layout-cell u-size-20 u-size-30-md u-white u-layout-cell-4">
                 <div class="u-container-layout u-container-layout-5">
                   <p class="u-text u-text-2">There are many flowers that are waiting for you to get!! </p>
-                  <div class="wrap">
+                  <form action="/luckydraw" method="get"><div class="wrap">
                     <button class="button2">Lucky Draw</button>
-                  </div>
+                  </div></form>
+                  
                 </div>
               </div>
               <div class="u-container-style u-image u-layout-cell u-right-cell u-size-20 u-size-60-md u-image-4">
@@ -160,7 +166,10 @@ Home
   </div>
 </section>
 
-
+<script>function myFunc(){
+  window.alert("You have started FOCUZ");
+}</script>
 </body>
+
 
 {% endblock %}

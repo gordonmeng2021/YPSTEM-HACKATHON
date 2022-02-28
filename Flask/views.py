@@ -1,9 +1,10 @@
 #Contains the routings and the view functions
 import re
 from datetime import datetime
+from sys import flags
 
 
-from flask import Flask, render_template
+from flask import Flask, render_template,flash
 
 from . import app
 
@@ -24,10 +25,15 @@ def home():
     # print("helllloooooo")
     return render_template("home.html")
 
-#open focusing function
-state= True
+#---------------------------------open focusing function
+#*******the time they focus
+
+focusedTime = 0
+notfocusedTime = 0
+
 @app.route("/focuz")
 def focuz():
+     
     face_cascade = cv2.CascadeClassifier('Flask/haarcascade_frontalface_default.xml')
     cap = cv2.VideoCapture(0)
 
@@ -37,9 +43,11 @@ def focuz():
     
       
     def run():
+        
         global isFocus,focusedTime,notfocusedTime,state
-        focusedTime = 0
-        notfocusedTime =0
+        state= True
+        
+        
             
         while state:
              
@@ -74,22 +82,30 @@ def focuz():
             if k==27:
                 break
     
-    run()
     
+
+    run()
+    # print("You have focused :", str(int(focusedTime)),'s')
+    # print("You have not focused :", str(int(notfocusedTime)),'s')  
     return "Get back to continue"
 
-@app.route("/test")
-def test():
-    global state
+@app.route("/stop")
+def stop():
+    global state,focusedTime,notfocusedTime
     state=False
-    return "You stopped FOCUZ"
+    flash("You have stopped FOCUZ","info")
+    flash("You have focused : "+ str(int(focusedTime))+'s')
+    flash("You have not focused : "+ str(int(notfocusedTime))+'s')
+    focusedTime=0
+    notfocusedTime=0  
+    return render_template("home.html")
 
 
-@app.route("/luckydraw/")
+@app.route("/luckydraw")
 def luckydraw():
     return render_template("luckydraw.html")
 
-@app.route("/setting/")
+@app.route("/setting")
 def setting():
     return render_template("setting.html")
 
@@ -344,3 +360,8 @@ def reset_database():
     create_focus_time()
     create_users_info()
     list_all()
+
+
+
+
+    
