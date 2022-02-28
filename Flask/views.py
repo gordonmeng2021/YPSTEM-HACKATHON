@@ -2,6 +2,7 @@
 import re
 from datetime import datetime
 
+
 from flask import Flask, render_template
 
 from . import app
@@ -13,15 +14,76 @@ import sqlite3 as sql
 import datetime as DT
 import matplotlib.pyplot as plt
 
+import cv2
+from threading import *
+import time
+
 @app.route("/")
 @app.route("/home/")
 def home():
+    # print("helllloooooo")
     return render_template("home.html")
 
-@app.route("/test/")
-def test():
-    print("helllloooooo")
+#open focusing function
+state= True
+@app.route("/focuz")
+def focuz():
+    face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+    cap = cv2.VideoCapture(0)
+
+    def focus():
+        global isFocus
+        isFocus = True
     
+      
+    def run():
+        global isFocus,focusedTime,notfocusedTime,state
+        focusedTime = 0
+        notfocusedTime =0
+            
+        while state:
+             
+            startTimer=time.time()
+            isFocus = False
+    # Read the frame
+            _, img = cap.read()
+            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            faces = face_cascade.detectMultiScale(gray, 1.1, 4)
+            for (x, y, w, h) in faces:
+                if len(faces)<2:
+                    focus()
+               
+            
+               # cv2.rectangle(img, (x, y), (x+w, y+h), (0, 0, 255), 2)
+               
+        # change state if has face
+               
+               
+            if isFocus == False:
+                print("You are not focusing")
+                endTimer=time.time()
+                notfocusedTime += (endTimer-startTimer) 
+            else:
+                print("You are okay")
+                endTimer=time.time()
+                focusedTime += (endTimer-startTimer)
+            
+         
+            
+            k = cv2.waitKey(1) & 0xff
+            if k==27:
+                break
+    
+    run()
+    
+    return "Get back to continue"
+
+@app.route("/test")
+def test():
+    global state
+    state=False
+    return "You stopped FOCUZ"
+
 
 @app.route("/luckydraw/")
 def luckydraw():
