@@ -26,78 +26,184 @@
         <meta property="og:title" content="Home">
         <meta property="og:type" content="website">
       </head>
-      <body class="u-body u-xl-mode">
-          <header class="u-clearfix u-header u-header" id="sec-7330"><div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-            <a href="https://nicepage.com" class="u-image u-logo u-image-1">
-              <img src="images/default-logo.png" class="u-logo-image u-logo-image-1">
-            </a>
-            <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
-              <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
-                <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#">
-                  <svg class="u-svg-link" viewBox="0 0 24 24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
-                  <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
-    </g></svg>
-                </a>
-              </div>
-              <div class="u-nav-container">
-                <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{{ url_for('home') }}" style="padding: 10px 20px;">Home</a>
-    </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{{ url_for('luckydraw') }}" style="padding: 10px 20px;">Lucky Draw</a> 
-    </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="{{ url_for('setting') }}" style="padding: 10px 20px;">Settings</a>
-    </li></ul>
-              </div>
-              <div class="u-nav-container-collapse">
-                <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
-                  <div class="u-inner-container-layout u-sidenav-overflow">
-                    <div class="u-menu-close"></div>
-                    <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-                      <li class="u-nav-item"><a class="u-button-style u-nav-link" href="{{ url_for('home') }}">Home</a></li>
-                      <li class="u-nav-item"><a class="u-button-style u-nav-link" href="{{ url_for('luckydraw') }}">Lucky Draw</a>
-    </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="{{ url_for('setting') }}">Settings</a></li></ul>
+      <div>
+        <!-- Vertical Navbar -->
+        <nav style="position: absolute; float: left; padding: 15px !important;" class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-bottom border-bottom-lg-0 border-end-lg" id="navbarVertical">
+          <div class="container-fluid">
+              <!-- Toggler -->
+              <button class="navbar-toggler ms-n2" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse" aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <!-- Brand -->
+              <a class="navbar-brand py-lg-2 mb-lg-5 px-lg-6 me-0" href="/home/" style="margin-bottom: 12px !important;">
+                  <img src="https://preview.webpixels.io/web/img/logos/clever-primary.svg" alt="...">
+              </a>
+              <!-- User menu (mobile) -->
+              <div class="navbar-user d-lg-none">
+                  <!-- Dropdown -->
+                  <div class="dropdown">
+                      <!-- Toggle -->
+                      <a href="#" id="sidebarAvatar" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <div class="avatar-parent-child">
+                              <img alt="Image Placeholder" src="https://images.unsplash.com/photo-1548142813-c348350df52b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar- rounded-circle">
+                              <span class="avatar-child avatar-badge bg-success"></span>
+                          </div>
+                      </a>
+                      <!-- Menu -->
+                      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="sidebarAvatar">
+                          <a href="#" class="dropdown-item">Profile</a>
+                          <a href="#" class="dropdown-item">Settings</a>
+                          <a href="#" class="dropdown-item">Billing</a>
+                          <hr class="dropdown-divider">
+                          <a href="#" class="dropdown-item">Logout</a>
+                      </div>
                   </div>
-                </div>
-                <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
               </div>
-            </nav>
-          </div></header>
+              <!-- Collapse -->
+              <div class="collapse navbar-collapse" id="sidebarCollapse">
+                  <!-- Navigation -->
+                  <ul class="navbar-nav" >
+                      <li class="nav-item">
+                          <a class="nav-link" href="/home/">
+                              <i class="bi bi-house"></i> Home
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="/dashboard/">
+                              <i class="bi bi-bar-chart"></i> Dashboard
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="/luckydraw/">
+                              <i class="bi bi-cash-stack"></i> Lucky Draw
+                              <span class="badge bg-soft-primary text-primary rounded-pill d-inline-flex align-items-center ms-auto">6</span>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="/setting/">
+                              <i class="bi bi-gear"></i> Setting
+                          </a>
+                      </li>
+                  </ul>
+                  <!-- Navigation -->
+                  <ul class="navbar-nav mb-md-4">
+                      <li>
+                          <div class="nav-link text-xs font-semibold text-uppercase text-muted ls-wide" href="#">
+                              Friends
+                              <span class="badge bg-soft-primary text-primary rounded-pill d-inline-flex align-items-center ms-4">13</span>
+                          </div>
+                      </li>
+                      <li>
+                          <a href="#" class="nav-link d-flex align-items-center">
+                              <div class="me-4">
+                                  <div class="position-relative d-inline-block text-white">
+                                      <img alt="Image Placeholder" src="https://images.unsplash.com/photo-1548142813-c348350df52b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar rounded-circle">
+                                      <span class="position-absolute bottom-2 end-2 transform translate-x-1/2 translate-y-1/2 border-2 border-solid border-current w-3 h-3 bg-success rounded-circle"></span>
+                                  </div>
+                              </div>
+                              <div>
+                                  <span class="d-block text-sm font-semibold">
+                                      Person 1
+                                  </span>
+                                  <span class="d-block text-xs text-muted font-regular">
+                                      12B 13
+                                  </span>
+                              </div>
+                              <div class="ms-auto">
+                                  <i class="bi bi-chat"></i>
+                              </div>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#" class="nav-link d-flex align-items-center">
+                              <div class="me-4">
+                                  <div class="position-relative d-inline-block text-white">
+                                      <span class="avatar bg-soft-warning text-warning rounded-circle">JW</span>
+                                      <span class="position-absolute bottom-2 end-2 transform translate-x-1/2 translate-y-1/2 border-2 border-solid border-current w-3 h-3 bg-success rounded-circle"></span>
+                                  </div>
+                              </div>
+                              <div>
+                                  <span class="d-block text-sm font-semibold">
+                                      Person 2
+                                  </span>
+                                  <span class="d-block text-xs text-muted font-regular">
+                                      12B 17
+                                  </span>
+                              </div>
+                              <div class="ms-auto">
+                                  <i class="bi bi-chat"></i>
+                              </div>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="#" class="nav-link d-flex align-items-center">
+                              <div class="me-4">
+                                  <div class="position-relative d-inline-block text-white">
+                                      <img alt="..." src="https://images.unsplash.com/photo-1610899922902-c471ae684eff?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar rounded-circle">
+                                      <span class="position-absolute bottom-2 end-2 transform translate-x-1/2 translate-y-1/2 border-2 border-solid border-current w-3 h-3 bg-danger rounded-circle"></span>
+                                  </div>
+                              </div>
+                              <div>
+                                  <span class="d-block text-sm font-semibold">
+                                      Person 3
+                                  </span>
+                                  <span class="d-block text-xs text-muted font-regular">
+                                      12C 27
+                                  </span>
+                              </div>
+                              <div class="ms-auto">
+                                  <i class="bi bi-chat"></i>
+                              </div>
+                          </a>
+                      </li>
+                  </ul>
+                  <!-- User (md) -->
+                  <ul class="navbar-nav">
+                      <li class="nav-item">
+                          <a class="nav-link" href="/login/">
+                              <i class="bi bi-box-arrow-left"></i> Logout
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </nav>
 
-        <div class="body-content">
-
-
-            {% block content %}
-            {% endblock %}
-            
-            
-                <!-- CONTACT -->
-            <div class="container-fluid bg-dark d-flex justify-content-center" id="section-Contact" style="padding-left:15%; padding-right: 15%; padding-top: 1.5em;">
-                <div class="row" style="height: 0; width: 30%; padding-bottom: 6%;">
-                <div class="col col-sm d-flex justify-content-center">
-                    <a href="https://www.facebook.com/profile.php?id=100008825226788" target="_blank">
-                    <img class="card-img-top" src="{{url_for('static', filename='../static/Assets/contact_icons/facebook_icon.png')}}" alt="facebook-icon">
-                    </a>
-                </div>
-                <div class="col col-sm d-flex justify-content-center">
-                    <a href="https://www.instagram.com/_queen.wcy_" target="_blank">
-                    <img class="card-img-top" src="{{url_for('static', filename='../static/Assets/contact_icons/instagram_icon.png')}}" alt="instagram-icon">
-                    </a>
-                </div>
-                <div class="col col-sm d-flex justify-content-center">
-                    <a href="http://linkedin.com/in/queena-wong-5619361a3" target="_blank">
-                    <img class="card-img-top" src="{{url_for('static', filename='../static/Assets/contact_icons/linkedin_icon.png')}}" alt="linkedin_icon">
-                    </a>
-                </div>
-                <div class="col col-sm d-flex justify-content-center">
-                    <a href="mailto:wongq9999@outlook.com" target="_blank">
-                    <img class="card-img-top" src="{{url_for('static', filename='../static/Assets/contact_icons/outlook_icon.png')}}" alt="outlook-icon">
-                    </a>
-                </div>
-                <div class="col col-sm d-flex justify-content-center">
-                    <a href="https://github.com/imcoolthx" target="_blank">
-                    <img class="card-img-top" src="{{url_for('static', filename='../static/Assets/contact_icons/github_icon.png')}}" alt="github-icon">
-                    </a>
-                </div>
-                </div>
-            </div>   
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    </body>
+      <div class="body-content" style="width:80%; float: right; min-height: 711.2px;">
+          {% block content %}
+          {% endblock %}
+      </div>
+  </div>
+      <!-- CONTACT -->
+    <div class="container-fluid bg-dark d-flex justify-content-center" id="section-Contact" style="padding-left:15%; padding-right: 15%; padding-top: 1.5em; z-index: 100;">
+      <div class="row" style="height: 0; width: 30%; padding-bottom: 6%;">
+      <div class="col col-sm d-flex justify-content-center">
+          <a href="https://www.facebook.com/profile.php?id=100008825226788" target="_blank">
+          <img class="card-img-top" src="{{url_for('static', filename='../static/Assets/contact_icons/facebook_icon.png')}}" alt="facebook-icon">
+          </a>
+      </div>
+      <div class="col col-sm d-flex justify-content-center">
+          <a href="https://www.instagram.com/_queen.wcy_" target="_blank">
+          <img class="card-img-top" src="{{url_for('static', filename='../static/Assets/contact_icons/instagram_icon.png')}}" alt="instagram-icon">
+          </a>
+      </div>
+      <div class="col col-sm d-flex justify-content-center">
+          <a href="http://linkedin.com/in/queena-wong-5619361a3" target="_blank">
+          <img class="card-img-top" src="{{url_for('static', filename='../static/Assets/contact_icons/linkedin_icon.png')}}" alt="linkedin_icon">
+          </a>
+      </div>
+      <div class="col col-sm d-flex justify-content-center">
+          <a href="mailto:wongq9999@outlook.com" target="_blank">
+          <img class="card-img-top" src="{{url_for('static', filename='../static/Assets/contact_icons/outlook_icon.png')}}" alt="outlook-icon">
+          </a>
+      </div>
+      <div class="col col-sm d-flex justify-content-center">
+          <a href="https://github.com/imcoolthx" target="_blank">
+          <img class="card-img-top" src="{{url_for('static', filename='../static/Assets/contact_icons/github_icon.png')}}" alt="github-icon">
+          </a>
+      </div>
+      </div>
+  </div>   
 </html>
+
+
