@@ -1,5 +1,5 @@
 #Contains the routings and the view functions
-from os import remove
+
 import re
 from datetime import datetime
 
@@ -105,6 +105,11 @@ def stop():
 
     return redirect(url_for('home'))
 
+@app.route("/puzzle")
+def puzzle():
+    print("dfdfdfdfdfdfdf")
+    
+    return render_template("luckydraw.html",imgpath= "static/Assets/luckydraw/puzzle1-S.jpg")
 
 @app.route("/luckydraw")
 def luckydraw():

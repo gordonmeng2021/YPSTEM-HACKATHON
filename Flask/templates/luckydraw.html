@@ -8,6 +8,13 @@ Lucky Draw
 {% endblock %}
 
 {% block content %}
+<!-- <style>
+  
+  .u-section-2 .u-image-1 {
+  background-image: url("static/Assets/luckydraw/puzzle1-S_bur.jpg");
+  background-position: 50% 50%;
+}
+</style> -->
 <body>
   <section class="u-clearfix u-section-1" id="carousel_3128">
     <div class="u-clearfix u-sheet u-sheet-1">
@@ -35,7 +42,8 @@ Lucky Draw
                 </div>
                 <div class="u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-3">
                   <div class="u-container-layout">
-                    <button class="u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-50 u-btn-1">GET A PIECE OF PUZZLE!</button>
+                    <form action="/puzzle" method="get"><button class="u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-50 u-btn-1">GET A PIECE OF PUZZLE!</button></form>
+                    
                   </div>
                 </div>
               </div>
@@ -194,5 +202,5 @@ Lucky Draw
       </div>
     </div>
   </section>
-</body>>    
+</body>
 {% endblock %}
