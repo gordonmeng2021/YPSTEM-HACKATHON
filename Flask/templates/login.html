@@ -15,6 +15,9 @@ Login
             <div class="forms">
                 <div class="form login">
                     <span class="title">Login</span>
+                    {% if error is defined %}
+                    <p style="color: red;">{{error}}</p>
+                    {% endif %}
 
                     <form action="{{ url_for('login') }}" method="post">
                         <div class="input-field">
