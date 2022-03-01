@@ -135,12 +135,18 @@ def add_website():
                     pass
                 else:
                     file.write(reroute + " " + site + "\n")
-                    flash(get_blocked_website_list("queena1234@gmail.com"))
             return redirect("/setting")
     else:
         website = get_blocked_website_list("queena1234@gmail.com")
-        flash(get_blocked_website_list("queena1234@gmail.com"))
         return render_template("setting.html", website = website)
+
+
+@app.route('/setting', methods = ["POST", "GET"])
+def show_website():
+    website = get_blocked_website_list("queena1234@gmail.com")
+    return render_template("setting.html", website = website)
+
+
 
 
 

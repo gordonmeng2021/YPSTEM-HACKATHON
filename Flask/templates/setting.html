@@ -74,17 +74,22 @@ Settings
                         <input name = "website" class="form-control" type="text" id="website" placeholder="www.amazon.com" >
                     </div>
                     <br/>
-                    <button name = "add_website" class="btn btn-style-1 btn-primary" type="submit" >Add Website</button>
+                    <button name = "add_website" class="btn btn-style-1 btn-primary" type="submit" value="block">Add Website</button>
 
                 </div>
             </form>
 
+            <!-- <form action="/setting" method="POST">
+                <button name = "add_website" class="btn btn-style-1 btn-primary" type="submit" value="unblock">Add Website</button>
+            </form> -->
+
             <br/><br/>
-            {% for url in website %}
-            <tr>
-                <td>{{website[0]}}</td>
-            </tr>
-            {% endfor %}
+                    <ul>
+                    {% for websites in website %}
+                    <li>{{ websites }}</li> 
+                    
+                    {% endfor %}
+                    </ul>
         </div>
     </div>
 </div>
