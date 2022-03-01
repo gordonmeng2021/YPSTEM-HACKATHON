@@ -14,6 +14,7 @@ Settings
               <div class="card">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
+                    <!-- not yet link to user icon -->
                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                     <div class="mt-3">
                       <h4>{{username}}</h4>
@@ -31,11 +32,11 @@ Settings
                       </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h6 class="mb-0">Total Focus Time</h6>
-                    <span class="text-secondary">0 hours</span>
+                    <span class="text-secondary">{{int_time}}</span>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h6 class="mb-0">Logged On Days</h6>
-                    <span class="text-secondary">0 days</span>
+                    <span class="text-secondary">{{days_ago}}</span>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h6 class="mb-0">Class</h6>
@@ -57,23 +58,21 @@ Settings
                     <div class="col-sm-3">
                       <h6 class="mb-0">User Name</h6>
                     </div>
-                    <input class="settings-input col-sm-9" value={{username}}></input>
+                    <span class="text-secondary">{{username}}</span>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
                       <h6 class="mb-0">Email</h6>
                     </div>
-                    <input class="settings-input col-sm-9" value={{email}}>
-                    </input>
+                    <span class="text-secondary">{{email}}</span>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
                       <h6 class="mb-0">Password</h6>
                     </div>
-                    <input class="settings-input col-sm-9" value={{password}} type="password">
-                    </input>
+                    <span class="text-secondary">{{password}}</span>
                   </div>
                   <hr>
                 </div>
@@ -93,7 +92,7 @@ Settings
                   
               </div>
             </form>
-            <form>
+            <form action = "/setting" method = "POST">
               <div class="row" style="margin-bottom: 30px; --bs-gutter-x: 0em;">
                 <div class="card h-100">
                     <div class="card-body">
@@ -101,7 +100,8 @@ Settings
                             <h4 style="margin-bottom: 20px;">List of Blocked Website</h4>
                             {% for url in website %}
                             <div class="website-list-item w-100">
-                                <span>&#8226; {{url}}</span> 
+                                <span>&#8226; {{url}}</span>
+                                <button class="btn btn-style-1 btn-primary" margin = 100px type ="submit" name = "add_website" value = "{{url}}">Unblock</button><br/>
                             {% endfor %}
                             </div>
                         </div>
@@ -124,5 +124,6 @@ Settings
     </div>
 </div>
 </div>
-{% endblock %}
+</div>
 
+{% endblock %}
