@@ -37,6 +37,10 @@ def home():
 
 focusedTime = 0
 notfocusedTime = 0
+#Get block website info
+#Hostpath
+hostsPath = r"C:\Windows\System32\drivers\etc\hosts"
+reroute = "127.0.0.1"
 
 @app.route("/focuz")
 def focuz():
@@ -181,13 +185,28 @@ def luckydraw():
 
 @app.route("/setting")
 def setting():
-    username = "imcoolthanks"
-    email = "queena1234@gmail.com"
-    pw = "1234"
-    website = get_blocked_website_list(email)
-    print(website)
-    return render_template("setting.html", username=username, email=email, password=pw, website=website)
+    #Inserting into database
+    conn = sql.connect("Flask/static/Databases/database.db")
+    cur = conn.cursor()
+    user_data = '''SELECT username, user.email, password, SUM(hours), MAX(days_ago), icon_photo FROM focus_time, user 
+    WHERE focus_time.email = user.email '''
 
+    cur.execute(user_data)
+
+    row = cur.fetchall()
+  
+    conn.commit()
+
+    username = row[0][0]
+    email = row[0][1]
+    pw = row[0][2]
+    int_time = int(row[0][3])
+    days_ago = row[0][4]
+    icon_pic = row[0][5]
+
+    conn.close()
+    website = get_blocked_website_list(["queena1234@gmail.com"])
+    return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
 
 @app.route("/login/", methods = ['POST', 'GET'])
 def login():
@@ -211,92 +230,90 @@ def dashboard():
     return render_template("dashboard.html")
     
 
-#Get block website info
-#Hostpath
-hostsPath = r"C:\Windows\System32\drivers\etc\hosts"
-reroute = "127.0.0.1"
-
-
-
 @app.route('/setting', methods = ["POST", "GET"])
 def unblock_or_block():
+
+    #Inserting into database
+    conn = sql.connect("Flask/static/Databases/database.db")
+    cur = conn.cursor()
+
+    user_data = '''SELECT username, user.email, password, SUM(hours), MAX(days_ago), icon_photo FROM focus_time, user 
+    WHERE focus_time.email = user.email '''
+
+    cur.execute(user_data)
+
+    row = cur.fetchall()
+
+    conn.commit()
+
+    username = row[0][0]
+    email = row[0][1]
+    pw = row[0][2]
+    int_time = int(row[0][3])
+    days_ago = row[0][4]
+    icon_pic = row[0][5]
+
+    conn.close()
     website = get_blocked_website_list("queena1234@gmail.com")
+
     if request.method == "POST":
         if request.form['add_website'] == 'block':
             add_website()
-            return render_template("setting.html", website = website)
-        elif request.form['add_website'] == 'unblock':
+            return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
+
+        elif request.form['add_website'] == '{{url}}': #helppppp 
             unblock_website()
-            return render_template("setting.html")
+            return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
+
         elif request.form['add_website'] == 'unblock_all':
             unblock_all_website()  
-            return render_template("setting.html", website = website)
+            return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
+
         else:
-            return render_template("setting.html", website = website)
+            return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
+
     else:
-        return render_template("setting.html", website = website)
-    
+         return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
+
 
 def add_website():
-    website = get_blocked_website_list("queena1234@gmail.com")
+    #need to select email by login page 
     new_website = request.form['website']
-    
     add_blocked_website("queena1234@gmail.com",new_website)
+    website = get_blocked_website_list("queena1234@gmail.com")
     return render_template("setting.html", website = website)
 
 
 
 def unblock_all_website():
-        conn = sql.connect("Flask/static/Databases/database.db")
-        cur = conn.cursor()
+    conn = sql.connect("Flask/static/Databases/database.db")
+    cur = conn.cursor()
 
-        delete_query = "DELETE FROM blocked_website WHERE email = ?"
-        cur.execute(delete_query, ["queena1234@gmail.com"])
-        conn.commit()
+    get_email = "SELECT email FROM user"
+    cur.execute(get_email)
+    row = cur.fetchall()
+    delete_query = "DELETE FROM blocked_website WHERE email = ?"
+    cur.execute(delete_query, (row[0][0],))
 
-        conn.close()
-
-        with open(hostsPath, 'w') as file:
-            file.write(
-'''# Copyright (c) 1993-2009 Microsoft Corp.
-#
-# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.
-#
-# This file contains the mappings of IP addresses to host names. Each
-# entry should be kept on an individual line. The IP address should
-# be placed in the first column followed by the corresponding host name.
-# The IP address and the host name should be separated by at least one
-# space.
-#
-# Additionally, comments (such as these) may be inserted on individual
-# lines or following the machine name denoted by a '#' symbol.
-#
-# For example:
-#
-#      102.54.94.97     rhino.acme.com          # source server
-#       38.25.63.10     x.acme.com              # x client host
-
-# localhost name resolution is handled within DNS itself.
-#	127.0.0.1       localhost
-#	::1             localhost
-
-''')
+    website = get_blocked_website_list("queena1234@gmail.com")
+    conn.commit()
+    conn.close()
+    return render_template("setting.html", website = website)
 
 
-@app.route('/delete/<int:id>')
-def unblock_website(id):   
+
+def unblock_website():   
     conn = sql.connect("Flask/static/Databases/database.db")
     cur = conn.cursor()
 
 
-    delete_query = "DELETE FROM blocked_website WHERE id = ?"
-    website_id = "SELECT id , url FROM blocked_website"
-    cur.execute(delete_query, (id))
-    cur.execute(website_id)
+    delete_query = "DELETE FROM blocked_website WHERE url = ?"
+    cur.execute(delete_query, ["{{url}}"])
+    website = get_blocked_website_list("queena1234@gmail.com")
     conn.commit()
 
     conn.close()
-    return render_template("setting.html", delete_query = delete_query, website_id = website_id)
+    return render_template("setting.html", delete_query = delete_query, website = website)
 
 
 
@@ -379,7 +396,7 @@ def create_blocked_website():
 
     #Create table
     #email,seq_no,url
-    conn.execute("""CREATE TABLE blocked_website (id INTEGER AUTO INCREMENT, email TEXT, url TEXT )""")
+    conn.execute("""CREATE TABLE blocked_website (email TEXT, url TEXT )""")
     print("table created")
 
     #DEMO 
