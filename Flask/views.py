@@ -19,6 +19,9 @@ from threading import *
 import time
 
 @app.route("/")
+def unloggedin():
+    return render_template("unloggedin.html")
+
 @app.route("/home/")
 def home():
     # print("helllloooooo")
@@ -113,7 +116,33 @@ def luckydraw():
 
 @app.route("/setting")
 def setting():
-    return render_template("setting.html")
+    username = "imcoolthanks"
+    email = "queena1234@gmail.com"
+    pw = "1234"
+    website = get_blocked_website_list(email)
+    print(website)
+    return render_template("setting.html", username=username, email=email, password=pw, website=website)
+
+
+@app.route("/login/", methods = ['POST', 'GET'])
+def login():
+    if request.method == 'POST':
+        email = request.form.get('email') 
+        password = request.form.get('password')
+
+        success = login(email, password)
+        
+        if success:
+            username = get_username(email)
+            print(username)
+            return render_template("home.html")
+        else:
+            return render_template("error.html")
+
+    return render_template('login.html')
+
+    
+    
 
 #Get block website info
 #Hostpath
@@ -190,12 +219,14 @@ def login(email, password):
 
     true_password = cur.fetchall()[0][0]
 
+    conn.close()
+
     if password == true_password:
         print("Logged in")
+        return True
     else:
         print("Wrong Password")
-
-    conn.close()
+        return False
 
 def sign_up(username, email, password):
     conn = sql.connect("Flask/static/Databases/database.db")
@@ -342,9 +373,7 @@ def graph(email):
     cur = conn.cursor()
 
     #get username
-    query = 'SELECT username FROM user WHERE email = ?'
-    cur.execute(query, (email,))
-    username = cur.fetchall()[0][0]
+    username = get_username(email)
 
     #get focus_time
     query = 'SELECT hours FROM focus_time WHERE email = ?'
@@ -379,6 +408,18 @@ def graph(email):
     #Save Graph
     plt.savefig('Flask/static/Assets/graphs/'+username+'.png')
 
+def get_username(email):
+    conn = sql.connect("Flask/static/Databases/database.db")
+    cur = conn.cursor()
+
+    #get username
+    query = 'SELECT username FROM user WHERE email = ?'
+    cur.execute(query, (email,))
+    username = cur.fetchall()[0][0]
+
+    conn.close()
+
+    return username
 
 #USED FOR DEBUGGING
 def list_all():
