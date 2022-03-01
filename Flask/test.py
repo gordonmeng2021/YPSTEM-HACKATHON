@@ -1,3 +1,5 @@
+from cgitb import reset
+from operator import rshift
 import sqlite3 as sql
 
 #Plot graph imports
@@ -250,6 +252,3 @@ def reset_database():
     create_focus_time()
     create_users_info()
     list_all()
-
-
-reset_database()
