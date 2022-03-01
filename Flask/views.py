@@ -134,11 +134,13 @@ def login():
             print(username)
             return redirect(url_for('home'))
         else:
-            return render_template("error.html")
+            return render_template('login.html', error="Incorrect email or password.")
 
     return render_template('login.html')
 
-    
+@app.route("/dashboard/")
+def dashboard():
+    return render_template("dashboard.html")
     
 
 #Get block website info
