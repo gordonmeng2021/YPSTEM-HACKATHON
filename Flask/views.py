@@ -178,7 +178,9 @@ def add_website():
     new_website = request.form['website']
     
     add_blocked_website("queena1234@gmail.com",new_website)
+    return render_template("setting.html", website = website)
 
+def start_blocking():
     with open(hostsPath, 'r+') as file:
         content = file.read()
         for site in get_blocked_website_list("queena1234@gmail.com"):
@@ -186,7 +188,8 @@ def add_website():
                 pass
             else:
                 file.write(reroute + " " + site + "\n")
-    return render_template("setting.html", website = website)
+    return render_template("home.html")
+    
 
 def unblock_all_website():
         conn = sql.connect("Flask/static/Databases/database.db")
