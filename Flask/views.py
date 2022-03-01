@@ -1,9 +1,13 @@
 #Contains the routings and the view functions
-from os import remove
 import re
 from datetime import datetime
 
-from flask import Flask, render_template,flash, request, redirect, url_for
+from sys import flags
+
+
+from flask import Flask, render_template, request, redirect, flash
+from numpy import delete
+
 from . import app
 
 #database
@@ -21,10 +25,10 @@ import time
 def unloggedin():
     return render_template("unloggedin.html")
 
-@app.route("/home/")
+@app.route("/home")
 def home():
-    # print("helllloooooo")
-    return render_template("home.html")
+    username = "imcoolthanks"
+    return render_template("home.html",username=username)
 
 #---------------------------------open focusing function
 #*******the time they focus
@@ -37,6 +41,16 @@ def focuz():
     print("Focuz running")
     face_cascade = cv2.CascadeClassifier('Flask/haarcascade_frontalface_default.xml')
     cap = cv2.VideoCapture(0)
+
+
+    def start_blocking():
+        with open(hostsPath, 'r+') as file:
+            content = file.read()
+            for site in get_blocked_website_list("queena1234@gmail.com"):
+                if site in content:
+                    pass
+                else:
+                    file.write(reroute + " " + site + "\n")
 
     def focus():
         global isFocus
@@ -81,35 +95,87 @@ def focuz():
                 break
     
     
-    # showmsg()
+    start_blocking()
     run()
     # print("You have focused :", str(int(focusedTime)),'s')
     # print("You have not focused :", str(int(notfocusedTime)),'s')  
     return "Get back to continue"
 
-# @app.route("/showmsg")
-# def showmsg():
-    
-#     flash("You have started FOCUZ","info")
-#     return render_template("home.html")
     
 @app.route("/stop")
 def stop():
-    
     global state,focusedTime,notfocusedTime
     state=False
     flash("You have stopped FOCUZ","info")
     flash("You have focused : "+ str(int(focusedTime))+'s')
     flash("You have not focused : "+ str(int(notfocusedTime))+'s')
+    
+    #Inserting into database
+    conn = sql.connect("Flask/static/Databases/database.db")
+    cur = conn.cursor()
+
+    query = "INSERT INTO focus_time VALUES (?,?,?)"
+    cur.execute(query, ["queena1234@gmail.com", 1 , focusedTime])
+
+    conn.commit()
+
+    conn.close()
+
+    with open(hostsPath, 'w') as file:
+        file.write(
+'''# Copyright (c) 1993-2009 Microsoft Corp.
+#
+# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.
+#
+# This file contains the mappings of IP addresses to host names. Each
+# entry should be kept on an individual line. The IP address should
+# be placed in the first column followed by the corresponding host name.
+# The IP address and the host name should be separated by at least one
+# space.
+#
+# Additionally, comments (such as these) may be inserted on individual
+# lines or following the machine name denoted by a '#' symbol.
+#
+# For example:
+#
+#      102.54.94.97     rhino.acme.com          # source server
+#       38.25.63.10     x.acme.com              # x client host
+
+# localhost name resolution is handled within DNS itself.
+#	127.0.0.1       localhost
+#	::1             localhost
+
+''')
+
     focusedTime=0
     notfocusedTime=0 
+    username = "imcoolthanks"
+    
+    return render_template("home.html",username=username)
 
-    return redirect(url_for('home'))
-
+@app.route("/puzzle")
+def puzzle():
+    print("dfdfdfdfdfdfdf")
+    
+    return render_template("luckydraw.html",imgpath= "static/Assets/luckydraw/puzzle1-S.jpg")
 
 @app.route("/luckydraw")
 def luckydraw():
-    return render_template("luckydraw.html")
+    #Inserting into database
+    conn = sql.connect("Flask/static/Databases/database.db")
+    cur = conn.cursor()
+
+    query = "INSERT INTO focus_time VALUES (?,?,?)"
+    sum_time = "SELECT SUM(hours) FROM focus_time"
+    cur.execute(query, ["queena1234@gmail.com", 1 , focusedTime])
+    cur.execute(sum_time)
+
+    row = cur.fetchall()
+    int_row = int(row[0][0])
+    conn.commit()
+
+    conn.close()
+    return render_template("luckydraw.html", int_row = int_row)
 
 @app.route("/setting/")
 def setting():
@@ -132,7 +198,7 @@ def login():
         if success:
             username = get_username(email)
             print(username)
-            return redirect(url_for('home'))
+            return render_template("home.html")
         else:
             return render_template('login.html', error="Incorrect email or password.")
 
@@ -169,37 +235,14 @@ reroute = "127.0.0.1"
 #         return render_template("setting.html", website = website)
     
 
-# @app.route('/setting', methods = ["POST", "GET"])
 def add_website():
     website = get_blocked_website_list("queena1234@gmail.com")
     new_website = request.form['website']
     
     add_blocked_website("queena1234@gmail.com",new_website)
-
-    with open(hostsPath, 'r+') as file:
-        content = file.read()
-        for site in get_blocked_website_list("queena1234@gmail.com"):
-            if site in content:
-                pass
-            else:
-                file.write(reroute + " " + site + "\n")
-        return render_template("setting.html", website = website)
+    return render_template("setting.html", website = website)
 
 
-@app.route('/delete/<int:id>')
-def unblock_website(id):   
-    conn = sql.connect("Flask/static/Databases/database.db")
-    cur = conn.cursor()
-
-
-    delete_query = "DELETE FROM blocked_website WHERE id = ?"
-    website_id = "SELECT id , url FROM blocked_website"
-    cur.execute(delete_query, (id))
-    cur.execute(website_id)
-    conn.commit()
-
-    conn.close()
-    return render_template("setting.html", delete_query = delete_query, website_id = website_id)
 
 def unblock_all_website():
         conn = sql.connect("Flask/static/Databases/database.db")
@@ -236,6 +279,23 @@ def unblock_all_website():
 #	::1             localhost
 
 ''')
+
+
+@app.route('/delete/<int:id>')
+def unblock_website(id):   
+    conn = sql.connect("Flask/static/Databases/database.db")
+    cur = conn.cursor()
+
+
+    delete_query = "DELETE FROM blocked_website WHERE id = ?"
+    website_id = "SELECT id , url FROM blocked_website"
+    cur.execute(delete_query, (id))
+    cur.execute(website_id)
+    conn.commit()
+
+    conn.close()
+    return render_template("setting.html", delete_query = delete_query, website_id = website_id)
+
 
 
 
@@ -513,6 +573,3 @@ def reset_database():
     create_users_info()
     list_all()
 
-
-
-    
