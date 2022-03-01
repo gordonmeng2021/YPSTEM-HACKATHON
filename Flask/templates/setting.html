@@ -6,4 +6,123 @@ Settings
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='setting.css')}}" />
 {% endblock %}
 {% block content %}
+<div class="container">
+    <div class="main-body">  
+          <!-- USER ICON -->
+          <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex flex-column align-items-center text-center">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                    <div class="mt-3">
+                      <h4>{{username}}</h4>
+                      <p class="text-secondary mb-1">Title</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ACHIEVEMENTS -->
+              <div class="card mt-3">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                        <h4 style="padding-bottom: 20px;" class="mb-0">Achievements</h4>
+                      </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0">Total Focus Time</h6>
+                    <span class="text-secondary">0 hours</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0">Logged On Days</h6>
+                    <span class="text-secondary">0 days</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0">Class</h6>
+                    <span class="text-secondary">0</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0">Puzzles Completed</h6>
+                    <span class="text-secondary">0</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- CHANGE SETTINGS -->
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="user-info-card card-body">
+                  <h4 style="margin-bottom: 30px;">User Info</h4>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">User Name</h6>
+                    </div>
+                    <input class="settings-input col-sm-9" value={{username}}></input>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Email</h6>
+                    </div>
+                    <input class="settings-input col-sm-9" value={{email}}>
+                    </input>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Password</h6>
+                    </div>
+                    <input class="settings-input col-sm-9" value={{password}} type="password">
+                    </input>
+                  </div>
+                  <hr>
+                </div>
+              </div>
+
+              <!-- WEBSITES -->
+              
+            <form action="/setting" method="POST">
+              <div class="col-md-12">
+                  <div class="form-group">
+                    <h4>Add to Blocked website</h4>
+                      <input name = "website" class="form-control" type="text" id="website" placeholder="Input Website You Would Like to Block When Focusing" >
+                  </div>
+                  <br/>
+                  <button name = "add_website" class="btn btn-style-1 btn-primary" type="submit" value="block">Add Website</button>     
+                  <span width = 500><button name = "add_website" class="btn btn-style-1 btn-primary" type="submit" value="unblock_all">Unblock All</button></span>     
+                  
+              </div>
+            </form>
+            <form>
+              <div class="row" style="margin-bottom: 30px; --bs-gutter-x: 0em;">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="website-blocked-list">
+                            <h4 style="margin-bottom: 20px;">List of Blocked Website</h4>
+                            {% for url in website %}
+                            <div class="website-list-item w-100">
+                                <span>&#8226; {{url}}</span>
+                            {% endfor %}
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+              </form>
+
+                <div class="col-12">
+                    <hr class="mt-2 mb-3">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center">
+
+                
+                    </div>
+                </div>
+       
+                </div>               
+              </div>           
+        </div>
+    </div>
+</div>
+</div>
 {% endblock %}
+

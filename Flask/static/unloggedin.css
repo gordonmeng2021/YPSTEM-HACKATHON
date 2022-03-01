@@ -1,0 +1,230 @@
+.login-div {
+  position: absolute;
+  top:10px;
+  right: 30px;
+}
+
+.button1{
+  display:inline-block;
+  padding:0.35em 1.2em;
+  border:0.1em solid #FFFFFF;
+  margin:0 0.3em 0.3em 0;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color:white;
+  text-align:center;
+  transition: all 0.2s;
+  background-color: transparent;
+  }
+.button1:hover{
+    background-color:#e0dfdf;
+    color: black;
+  }
+  @media all and (max-width:30em){
+  .button1{
+  display:block;
+  margin:0.4em auto;
+  }
+  } 
+
+  body {
+    font-size: 100%;
+    font-family: 'PT Sans', sans-serif;
+    line-height: 1.5;
+    background:#13478b;
+    color: rgba(255,255,255,0.7);
+    margin: 0;
+    padding-bottom: 200px;
+  }
+  body h1,
+  body h2,
+  body h3,
+  body h4,
+  body h5 {
+    color: #fff;
+    font-family: 'Lora';
+  }
+  body h1 {
+    font-size: 90px;
+    line-height: 1.1;
+    margin: 0px;
+  }
+  @media screen and (max-width: 40em) {
+    body h1 {
+      font-size: 50px;
+      line-height: 1.25;
+    }
+  }
+  body h2 {
+    font-size: 40px;
+    line-height: 1.3;
+  }
+  @media screen and (max-width: 40em) {
+    body h2 {
+      font-size: 28px;
+      line-height: 1.4;
+    }
+  }
+  body h4 {
+    font-size: 24px;
+    margin-bottom: 0.3em;
+  }
+  body p {
+    font-size: large;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  .container {
+    width: 100%;
+    padding-top: 130px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: opacity 0.5s 1s;
+  }
+  .container .out {
+    opacity: 0;
+  }
+  .container > h1,
+  .container > h2,
+  .container > p {
+    position: relative;
+    z-index: 2;
+    width: 80%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .fade {
+    transition: all 0.5s;
+  }
+  .fade.out {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  .flow {
+    transition: all 0.75s;
+  }
+  .flow.out {
+    opacity: 0;
+  }
+  .flowcontent {
+    position: relative;
+  }
+  .flowcontent:before {
+    display: table;
+    content: '';
+    width: 1px;
+    height: 800px;
+  }
+  .flowcontent .caption {
+    position: absolute;
+    border-radius: 3px;
+    padding: 20px;
+    display: block;
+    top: 50%;
+    left: 10%;
+    z-index: 1;
+    transform: translateY(-50%);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  }
+  .flowcontent .caption.right {
+    left: auto;
+    right: 10%;
+  }
+  .flowcontent .imageholder {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+  .flowcontent .imageholder.img1 {
+    background-image: url("https://dl.dropboxusercontent.com/u/8254962/rihanna-smoke.gif");
+  }
+  .flowcontent .imageholder.img2 {
+    background-image: url("https://dl.dropboxusercontent.com/u/8254962/pexels-photo-234078%401600px.jpeg");
+  }
+  .flowcontent video {
+    position: fixed;
+    min-height: 100%;
+    min-width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 0;
+  }
+
+  section {
+      height:100vh;
+  }
+
+  .first-container {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.6)), url("../static/Assets/background/first.webp");
+      background-repeat: no-repeat;
+      background-size: cover;
+      font-weight: 700;
+  }
+
+  section > h1,
+  section > h2,
+  section > p {
+    position: relative;
+    z-index: 2;
+    width: 80%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .first-container h1 {
+    text-align: center;
+    padding-top: 40vh;
+  }
+
+  .second-container p {
+    padding-top: 40vh;
+  }
+
+  .laptop-bg {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.6)), url("../static/Assets/background/laptop.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    float:left;
+  }
+
+  .clock-bg {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.6)), url("../static/Assets/background/clock.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    float:right;
+  }
+
+  .third-container div p {
+    text-align: center;
+    padding-top: 40%;
+  }
+
+  .countdown-container {
+    position: relative;
+    display: flex;
+    text-align: center;
+  }
+
+  .countdown-container *{
+    padding-top: 20vh;
+  }
+
+  .countdown-container :nth-child(2){
+    transition-delay: 1s;
+  }
+
+  .countdown-container :nth-child(3){
+    transition-delay: 2s;
+  }
