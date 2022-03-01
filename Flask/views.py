@@ -167,7 +167,6 @@ def unblock_or_block():
         return render_template("setting.html", website = website)
     
 
-# @app.route('/setting', methods = ["POST", "GET"])
 def add_website():
     website = get_blocked_website_list("queena1234@gmail.com")
     new_website = request.form['website']
@@ -181,23 +180,7 @@ def add_website():
                 pass
             else:
                 file.write(reroute + " " + site + "\n")
-        return render_template("setting.html", website = website)
-
-
-@app.route('/delete/<int:id>')
-def unblock_website(id):   
-    conn = sql.connect("Flask/static/Databases/database.db")
-    cur = conn.cursor()
-
-
-    delete_query = "DELETE FROM blocked_website WHERE id = ?"
-    website_id = "SELECT id , url FROM blocked_website"
-    cur.execute(delete_query, (id))
-    cur.execute(website_id)
-    conn.commit()
-
-    conn.close()
-    return render_template("setting.html", delete_query = delete_query, website_id = website_id)
+    return render_template("setting.html", website = website)
 
 def unblock_all_website():
         conn = sql.connect("Flask/static/Databases/database.db")
@@ -234,6 +217,23 @@ def unblock_all_website():
 #	::1             localhost
 
 ''')
+
+
+@app.route('/delete/<int:id>')
+def unblock_website(id):   
+    conn = sql.connect("Flask/static/Databases/database.db")
+    cur = conn.cursor()
+
+
+    delete_query = "DELETE FROM blocked_website WHERE id = ?"
+    website_id = "SELECT id , url FROM blocked_website"
+    cur.execute(delete_query, (id))
+    cur.execute(website_id)
+    conn.commit()
+
+    conn.close()
+    return render_template("setting.html", delete_query = delete_query, website_id = website_id)
+
 
 
 
