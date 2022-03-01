@@ -181,37 +181,8 @@ def luckydraw():
     conn.close()
     return render_template("luckydraw.html", int_row = int_row)
 
-    row = cur.fetchall()
-    int_row = int(row[0][0])
-    conn.commit()
 
-    conn.close()
-    return render_template("luckydraw.html", int_row = int_row)
 
-@app.route("/setting/")
-def setting():
-    #Inserting into database
-    conn = sql.connect("Flask/static/Databases/database.db")
-    cur = conn.cursor()
-    user_data = '''SELECT username, user.email, password, SUM(hours), MAX(days_ago), icon_photo FROM focus_time, user 
-    WHERE focus_time.email = user.email '''
-
-    cur.execute(user_data)
-
-    row = cur.fetchall()
-  
-    conn.commit()
-
-    username = row[0][0]
-    email = row[0][1]
-    pw = row[0][2]
-    int_time = int(row[0][3])
-    days_ago = row[0][4]
-    icon_pic = row[0][5]
-
-    conn.close()
-    website = get_blocked_website_list(["queena1234@gmail.com"])
-    return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
 
 @app.route("/login/", methods = ['POST', 'GET'])
 def login():
@@ -235,107 +206,72 @@ def dashboard():
     return render_template("dashboard.html")
     
 
-@app.route('/setting', methods = ["POST", "GET"])
+@app.route('/setting/', methods = ["POST", "GET"])
 def unblock_or_block():
-
     #Inserting into database
-    conn = sql.connect("Flask/static/Databases/database.db")
-    cur = conn.cursor()
+    def get_user_data():
+        conn = sql.connect("Flask/static/Databases/database.db")
+        cur = conn.cursor()
 
-    user_data = '''SELECT username, user.email, password, SUM(hours), MAX(days_ago), icon_photo FROM focus_time, user 
-    WHERE focus_time.email = user.email '''
+        user_data = '''SELECT username, user.email, password, SUM(hours), MAX(days_ago), icon_photo FROM focus_time, user 
+        WHERE focus_time.email = user.email '''
 
-    cur.execute(user_data)
+        cur.execute(user_data)
 
-    row = cur.fetchall()
+        row = cur.fetchall()
 
-    conn.commit()
+        conn.commit()
 
-    username = row[0][0]
-    email = row[0][1]
-    pw = row[0][2]
-    int_time = int(row[0][3])
-    days_ago = row[0][4]
-    icon_pic = row[0][5]
+        username = row[0][0]
+        email = row[0][1]
+        pw = row[0][2]
+        int_time = int(row[0][3])
+        days_ago = row[0][4]
+        icon_pic = row[0][5]
+        #change to email
+        website = get_blocked_website_list("queena1234@gmail.com")
 
-    conn.close()
-    website = get_blocked_website_list("queena1234@gmail.com")
+        conn.close()
+
+        return website, username, email, pw, int_time, days_ago, icon_pic
 
     if request.method == "POST":
         if request.form['add_website'] == 'block':
-            add_website()
-            return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
-
-        elif request.form['add_website'] == '{{url}}': #helppppp 
-            unblock_website()
+            new_website = request.form['website']
+            #change to email
+            add_blocked_website("queena1234@gmail.com",new_website)
+            website, username, email, pw, int_time, days_ago, icon_pic = get_user_data()
             return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
 
         elif request.form['add_website'] == 'unblock_all':
-            unblock_all_website()  
+            print("Unblock all")
+            unblock_all_website("queena1234@gmail.com")  
+            website, username, email, pw, int_time, days_ago, icon_pic = get_user_data()
             return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
 
-        else:
+        elif request.form['add_website'] == 'unblock_one':
+            print("Unblock one")
+            url = request.form['url']
+            print("Website to be unblocked:" + url)
+            remove_blocked_website("queena1234@gmail.com",url)
+            website, username, email, pw, int_time, days_ago, icon_pic = get_user_data()
             return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
 
     else:
-         return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
+        website, username, email, pw, int_time, days_ago, icon_pic = get_user_data()
+        return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
 
-
-def add_website():
-    #need to select email by login page 
-    new_website = request.form['website']
-    add_blocked_website("queena1234@gmail.com",new_website)
-    website = get_blocked_website_list("queena1234@gmail.com")
-    return render_template("setting.html", website = website)
-
-
-
-def unblock_all_website():
+def unblock_all_website(email):
     conn = sql.connect("Flask/static/Databases/database.db")
     cur = conn.cursor()
 
-    get_email = "SELECT email FROM user"
-    cur.execute(get_email)
-    row = cur.fetchall()
     delete_query = "DELETE FROM blocked_website WHERE email = ?"
-    cur.execute(delete_query, (row[0][0],))
+    cur.execute(delete_query, (email,))
 
-    website = get_blocked_website_list("queena1234@gmail.com")
     conn.commit()
     conn.close()
-    return render_template("setting.html", website = website)
 
 
-
-def unblock_website():   
-    conn = sql.connect("Flask/static/Databases/database.db")
-    cur = conn.cursor()
-
-
-    delete_query = "DELETE FROM blocked_website WHERE url = ?"
-    cur.execute(delete_query, ["{{url}}"])
-    website = get_blocked_website_list("queena1234@gmail.com")
-    conn.commit()
-
-    conn.close()
-    return render_template("setting.html", delete_query = delete_query, website = website)
-
-
-
-@app.route('/delete/<int:id>')
-def unblock_website(id):   
-    conn = sql.connect("Flask/static/Databases/database.db")
-    cur = conn.cursor()
-
-
-    delete_query = "DELETE FROM blocked_website WHERE id = ?"
-    website_id = "SELECT id , url FROM blocked_website"
-    cur.execute(delete_query, (id))
-    cur.execute(website_id)
-    conn.commit()
-
-    conn.close()
-    return render_template("setting.html", delete_query = delete_query, website_id = website_id)
 
 
 
@@ -347,7 +283,7 @@ def unblock_website(id):
 
 
     
-            
+        
             
     
 
@@ -458,6 +394,10 @@ def get_blocked_website_list(email):
 def add_blocked_website(email, url):
     conn = sql.connect("Flask/static/Databases/database.db")
     cur = conn.cursor()
+
+    websites = get_blocked_website_list(email)
+    if url in websites:
+        return
 
     insert_query = """INSERT INTO blocked_website (email, url)
                                        VALUES (?,?)"""
