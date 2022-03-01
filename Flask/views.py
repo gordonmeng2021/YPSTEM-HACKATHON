@@ -2,11 +2,8 @@
 from os import remove
 import re
 from datetime import datetime
-from sys import flags
-from flask import Flask, render_template,flash
 
-from flask import Flask, render_template, request, redirect
-from numpy import delete
+from flask import Flask, render_template,flash, request, redirect, url_for
 from . import app
 
 #database
@@ -37,7 +34,7 @@ notfocusedTime = 0
 
 @app.route("/focuz")
 def focuz():
-     
+    print("Focuz running")
     face_cascade = cv2.CascadeClassifier('Flask/haarcascade_frontalface_default.xml')
     cap = cv2.VideoCapture(0)
 
@@ -45,14 +42,11 @@ def focuz():
         global isFocus
         isFocus = True
     
-      
     def run():
         
         global isFocus,focusedTime,notfocusedTime,state
         state= True
-        
-        
-            
+    
         while state:
              
             startTimer=time.time()
@@ -108,8 +102,9 @@ def stop():
     flash("You have focused : "+ str(int(focusedTime))+'s')
     flash("You have not focused : "+ str(int(notfocusedTime))+'s')
     focusedTime=0
-    notfocusedTime=0  
-    return render_template("home.html")
+    notfocusedTime=0 
+
+    return redirect(url_for('home'))
 
 
 @app.route("/luckydraw")
@@ -137,7 +132,7 @@ def login():
         if success:
             username = get_username(email)
             print(username)
-            return render_template("home.html")
+            return redirect(url_for('home'))
         else:
             return render_template("error.html")
 
