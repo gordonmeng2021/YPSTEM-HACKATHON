@@ -1,10 +1,12 @@
 #Contains the routings and the view functions
+from os import remove
 import re
 from datetime import datetime
 from sys import flags
 from flask import Flask, render_template,flash
 
 from flask import Flask, render_template, request, redirect
+from numpy import delete
 from . import app
 
 #database
@@ -150,30 +152,97 @@ hostsPath = r"C:\Windows\System32\drivers\etc\hosts"
 reroute = "127.0.0.1"
 
 
+
 @app.route('/setting', methods = ["POST", "GET"])
-def add_website():
+def unblock_or_block():
+    website = get_blocked_website_list("queena1234@gmail.com")
     if request.method == "POST":
-        new_website = request.form['website']
-
-        add_blocked_website("queena1234@gmail.com",new_website)
-
-        with open(hostsPath, 'r+') as file:
-            content = file.read()
-            for site in get_blocked_website_list("queena1234@gmail.com"):
-                if site in content:
-                    pass
-                else:
-                    file.write(reroute + " " + site + "\n")
-            return redirect("/setting")
+        if request.form['add_website'] == 'block':
+            add_website()
+            return render_template("setting.html", website = website)
+        elif request.form['add_website'] == 'unblock':
+            unblock_website()
+            return render_template("setting.html")
+        elif request.form['add_website'] == 'unblock_all':
+            unblock_all_website()  
+            return render_template("setting.html", website = website)
+        else:
+            return render_template("setting.html", website = website)
     else:
-        website = get_blocked_website_list("queena1234@gmail.com")
+        return render_template("setting.html", website = website)
+    
+
+# @app.route('/setting', methods = ["POST", "GET"])
+def add_website():
+    website = get_blocked_website_list("queena1234@gmail.com")
+    new_website = request.form['website']
+    
+    add_blocked_website("queena1234@gmail.com",new_website)
+
+    with open(hostsPath, 'r+') as file:
+        content = file.read()
+        for site in get_blocked_website_list("queena1234@gmail.com"):
+            if site in content:
+                pass
+            else:
+                file.write(reroute + " " + site + "\n")
         return render_template("setting.html", website = website)
 
 
-@app.route('/setting', methods = ["POST", "GET"])
-def show_website():
-    website = get_blocked_website_list("queena1234@gmail.com")
-    return render_template("setting.html", website = website)
+@app.route('/delete/<int:id>')
+def unblock_website(id):   
+    conn = sql.connect("Flask/static/Databases/database.db")
+    cur = conn.cursor()
+
+
+    delete_query = "DELETE FROM blocked_website WHERE id = ?"
+    website_id = "SELECT id , url FROM blocked_website"
+    cur.execute(delete_query, (id))
+    cur.execute(website_id)
+    conn.commit()
+
+    conn.close()
+    return render_template("setting.html", delete_query = delete_query, website_id = website_id)
+
+def unblock_all_website():
+        conn = sql.connect("Flask/static/Databases/database.db")
+        cur = conn.cursor()
+
+        delete_query = "DELETE FROM blocked_website WHERE email = ?"
+        cur.execute(delete_query, ["queena1234@gmail.com"])
+        conn.commit()
+
+        conn.close()
+
+        with open(hostsPath, 'w') as file:
+            file.write(
+'''# Copyright (c) 1993-2009 Microsoft Corp.
+#
+# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.
+#
+# This file contains the mappings of IP addresses to host names. Each
+# entry should be kept on an individual line. The IP address should
+# be placed in the first column followed by the corresponding host name.
+# The IP address and the host name should be separated by at least one
+# space.
+#
+# Additionally, comments (such as these) may be inserted on individual
+# lines or following the machine name denoted by a '#' symbol.
+#
+# For example:
+#
+#      102.54.94.97     rhino.acme.com          # source server
+#       38.25.63.10     x.acme.com              # x client host
+
+# localhost name resolution is handled within DNS itself.
+#	127.0.0.1       localhost
+#	::1             localhost
+
+''')
+
+
+
+
 
 
 
@@ -251,7 +320,7 @@ def create_blocked_website():
 
     #Create table
     #email,seq_no,url
-    conn.execute("""CREATE TABLE blocked_website (email TEXT, url TEXT )""")
+    conn.execute("""CREATE TABLE blocked_website (id INTEGER AUTO INCREMENT, email TEXT, url TEXT )""")
     print("table created")
 
     #DEMO 
@@ -266,6 +335,7 @@ def create_blocked_website():
     conn.close()
 
     print("Loading completed")
+
 #return list of all blocked website
 def get_blocked_website_list(email):
     conn = sql.connect("Flask/static/Databases/database.db")
@@ -445,7 +515,6 @@ def reset_database():
     create_focus_time()
     create_users_info()
     list_all()
-
 
 
 
