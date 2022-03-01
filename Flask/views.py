@@ -1,6 +1,4 @@
 #Contains the routings and the view functions
-from asyncio.windows_events import NULL
-import email
 import re
 from datetime import datetime
 
@@ -8,7 +6,6 @@ from sys import flags
 
 
 from flask import Flask, render_template, request, redirect, flash
-from numpy import delete
 
 from . import app
 
@@ -125,7 +122,7 @@ def stop():
     cur = conn.cursor()
 
     query = "INSERT INTO focus_time VALUES (?,?,?)"
-    cur.execute(query, [user_email, NULL , focusedTime])
+    cur.execute(query, [user_email, 0 , focusedTime])
 
     conn.commit()
 
@@ -176,7 +173,7 @@ def luckydraw():
 
     query = "INSERT INTO focus_time VALUES (?,?,?)"
     sum_time = "SELECT SUM(hours) FROM focus_time"
-    cur.execute(query, [user_email, NULL , focusedTime])
+    cur.execute(query, [user_email, 0 , focusedTime])
     cur.execute(sum_time)
 
     row = cur.fetchall()
