@@ -146,6 +146,38 @@
     transition: all .3s ease-in-out 0s;
   }
 
+  /* stopmsg */
+#stopmsg{
+  width: 100%;
+  height: 50px;
+  background-color: lightgray;
+  color: black;
+  font-size: medium;
+  padding-top: 12px; 
+  text-align: center;
+
+}
+/* #startmsg{
+  width: 100%;
+  height: 50px;
+  background-color: rgb(51, 254, 68);
+  color: white;
+  padding-top: 50px; 
+  text-align: center;
+
+} */
+/* msgcon */
+
+
+#msgcontainer{
+  display: grid;
+  grid-template-columns: auto ;
+  grid-template-rows: auto;
+  background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.687), rgba(255, 255, 255, 0.803)),url("Assets/homephoto/images/pexels-ylanite-koppens-796602.jpg");
+  min-height: auto;
+  margin-bottom: 50px;
+}
+
 
 
 /* org */
