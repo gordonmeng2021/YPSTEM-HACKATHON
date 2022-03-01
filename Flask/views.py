@@ -111,7 +111,7 @@ def stop():
 def luckydraw():
     return render_template("luckydraw.html")
 
-@app.route("/setting")
+@app.route("/setting/")
 def setting():
     username = "imcoolthanks"
     email = "queena1234@gmail.com"
@@ -150,23 +150,23 @@ reroute = "127.0.0.1"
 
 
 
-@app.route('/setting', methods = ["POST", "GET"])
-def unblock_or_block():
-    website = get_blocked_website_list("queena1234@gmail.com")
-    if request.method == "POST":
-        if request.form['add_website'] == 'block':
-            add_website()
-            return render_template("setting.html", website = website)
-        elif request.form['add_website'] == 'unblock':
-            unblock_website()
-            return render_template("setting.html")
-        elif request.form['add_website'] == 'unblock_all':
-            unblock_all_website()  
-            return render_template("setting.html", website = website)
-        else:
-            return render_template("setting.html", website = website)
-    else:
-        return render_template("setting.html", website = website)
+# @app.route('/setting', methods = ["POST", "GET"])
+# def unblock_or_block():
+#     website = get_blocked_website_list("queena1234@gmail.com")
+#     if request.method == "POST":
+#         if request.form['add_website'] == 'block':
+#             add_website()
+#             return render_template("setting.html", website = website)
+#         elif request.form['add_website'] == 'unblock':
+#             unblock_website()
+#             return render_template("setting.html")
+#         elif request.form['add_website'] == 'unblock_all':
+#             unblock_all_website()  
+#             return render_template("setting.html", website = website)
+#         else:
+#             return render_template("setting.html", website = website)
+#     else:
+#         return render_template("setting.html", website = website)
     
 
 # @app.route('/setting', methods = ["POST", "GET"])
