@@ -1,2 +1,1 @@
-web: gunicorn Flask.app:app
-web: gunicorn Webpages.webapp:app
+web: gunicorn Flask.webapp:app
