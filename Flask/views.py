@@ -3,11 +3,10 @@ from os import remove
 import re
 from datetime import datetime
 from sys import flags
+from flask import Flask, render_template,flash
 
-
-from flask import Flask, render_template, request, redirect, flash
+from flask import Flask, render_template, request, redirect
 from numpy import delete
-
 from . import app
 
 #database
@@ -88,15 +87,21 @@ def focuz():
                 break
     
     
-
+    # showmsg()
     run()
     # print("You have focused :", str(int(focusedTime)),'s')
     # print("You have not focused :", str(int(notfocusedTime)),'s')  
     return "Get back to continue"
 
+# @app.route("/showmsg")
+# def showmsg():
+    
+#     flash("You have started FOCUZ","info")
+#     return render_template("home.html")
     
 @app.route("/stop")
 def stop():
+    
     global state,focusedTime,notfocusedTime
     state=False
     flash("You have stopped FOCUZ","info")
@@ -512,3 +517,5 @@ def reset_database():
     list_all()
 
 
+
+    
