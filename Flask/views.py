@@ -1,5 +1,6 @@
 #Contains the routings and the view functions
 from asyncio.windows_events import NULL
+import email
 import re
 from datetime import datetime
 
@@ -26,7 +27,7 @@ import time
 def unloggedin():
     return render_template("unloggedin.html")
 
-@app.route("/home")
+@app.route("/home/")
 def home():
     username = "imcoolthanks"
     return render_template("home.html",username=username)
@@ -41,7 +42,11 @@ notfocusedTime = 0
 hostsPath = r"C:\Windows\System32\drivers\etc\hosts"
 reroute = "127.0.0.1"
 
-@app.route("/focuz")
+#default
+user_username = "imcoolthanks"
+user_email = "queena1234@gmail.com"
+
+@app.route("/focuz/")
 def focuz():
     print("Focuz running")
     face_cascade = cv2.CascadeClassifier('Flask/haarcascade_frontalface_default.xml')
@@ -51,7 +56,7 @@ def focuz():
     def start_blocking():
         with open(hostsPath, 'r+') as file:
             content = file.read()
-            for site in get_blocked_website_list("queena1234@gmail.com"):
+            for site in get_blocked_website_list(user_email):
                 if site in content:
                     pass
                 else:
@@ -107,7 +112,7 @@ def focuz():
     return "Get back to continue"
 
     
-@app.route("/stop")
+@app.route("/stop/")
 def stop():
     global state,focusedTime,notfocusedTime
     state=False
@@ -120,7 +125,7 @@ def stop():
     cur = conn.cursor()
 
     query = "INSERT INTO focus_time VALUES (?,?,?)"
-    cur.execute(query, ["queena1234@gmail.com", NULL , focusedTime])
+    cur.execute(query, [user_email, NULL , focusedTime])
 
     conn.commit()
 
@@ -157,13 +162,13 @@ def stop():
     
     return render_template("home.html")
 
-@app.route("/puzzle")
+@app.route("/puzzle/")
 def puzzle():
     print("dfdfdfdfdfdfdf")
     
     return render_template("luckydraw.html",imgpath= "static/Assets/luckydraw/puzzle1-S.jpg")
 
-@app.route("/luckydraw")
+@app.route("/luckydraw/")
 def luckydraw():
     #Inserting into database
     conn = sql.connect("Flask/static/Databases/database.db")
@@ -171,7 +176,7 @@ def luckydraw():
 
     query = "INSERT INTO focus_time VALUES (?,?,?)"
     sum_time = "SELECT SUM(hours) FROM focus_time"
-    cur.execute(query, ["queena1234@gmail.com", NULL , focusedTime])
+    cur.execute(query, [user_email, NULL , focusedTime])
     cur.execute(sum_time)
 
     row = cur.fetchall()
@@ -182,19 +187,21 @@ def luckydraw():
     return render_template("luckydraw.html", int_row = int_row)
 
 
-
-
 @app.route("/login/", methods = ['POST', 'GET'])
-def login():
+def login():                
     if request.method == 'POST':
+        global user_email
+        global user_username
+
         email = request.form.get('email') 
         password = request.form.get('password')
 
         success = login(email, password)
         
         if success:
-            username = get_username(email)
-            print(username)
+            user_username = get_username(email)
+            user_email = email
+
             return render_template("home.html")
         else:
             return render_template('login.html', error="Incorrect email or password.")
@@ -203,7 +210,8 @@ def login():
 
 @app.route("/dashboard/")
 def dashboard():
-    return render_template("dashboard.html")
+    save_url = graph(user_email)
+    return render_template("dashboard.html", save_url=save_url)
     
 
 @app.route('/setting/', methods = ["POST", "GET"])
@@ -229,7 +237,7 @@ def unblock_or_block():
         days_ago = row[0][4]
         icon_pic = row[0][5]
         #change to email
-        website = get_blocked_website_list("queena1234@gmail.com")
+        website = get_blocked_website_list(user_email)
 
         conn.close()
 
@@ -238,14 +246,13 @@ def unblock_or_block():
     if request.method == "POST":
         if request.form['add_website'] == 'block':
             new_website = request.form['website']
-            #change to email
-            add_blocked_website("queena1234@gmail.com",new_website)
+            add_blocked_website(user_email,new_website)
             website, username, email, pw, int_time, days_ago, icon_pic = get_user_data()
             return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
 
         elif request.form['add_website'] == 'unblock_all':
             print("Unblock all")
-            unblock_all_website("queena1234@gmail.com")  
+            unblock_all_website(user_email)  
             website, username, email, pw, int_time, days_ago, icon_pic = get_user_data()
             return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
 
@@ -253,7 +260,7 @@ def unblock_or_block():
             print("Unblock one")
             url = request.form['url']
             print("Website to be unblocked:" + url)
-            remove_blocked_website("queena1234@gmail.com",url)
+            remove_blocked_website(user_email,url)
             website, username, email, pw, int_time, days_ago, icon_pic = get_user_data()
             return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
 
@@ -494,11 +501,15 @@ def graph(email):
 
     conn.close()
 
+    print(focus_time)
+
     #Get x-axis data
     days = []
     for i in range(7):
         d = today - DT.timedelta(days=(6-i))
         days.append(d.strftime("%m/%d"))
+
+    print(days)
 
     #Plot average line
     average = sum(focus_time) / len(focus_time)
@@ -514,7 +525,9 @@ def graph(email):
     plt.title('Past 7 Days Stats')
 
     #Save Graph
-    plt.savefig('Flask/static/Assets/graphs/'+username+'.png')
+    save_url = 'Assets/graphs/'+username+'.png'
+    plt.savefig('Flask/static/'+ save_url)
+    return save_url
 
 def get_username(email):
     conn = sql.connect("Flask/static/Databases/database.db")
@@ -528,6 +541,19 @@ def get_username(email):
     conn.close()
 
     return username
+
+def get_email(username):
+    conn = sql.connect("Flask/static/Databases/database.db")
+    cur = conn.cursor()
+
+    #get username
+    query = 'SELECT email FROM user WHERE username = ?'
+    cur.execute(query, (username,))
+    email = cur.fetchall()[0][0]
+
+    conn.close()
+
+    return email
 
 #USED FOR DEBUGGING
 def list_all():

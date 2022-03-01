@@ -252,3 +252,4 @@ def reset_database():
     list_all()
 
 
+reset_database()
