@@ -20,6 +20,10 @@ import cv2
 from threading import *
 import time
 
+#Zoom
+import webbrowser
+import http.client
+
 @app.route("/")
 def unloggedin():
     return render_template("unloggedin.html")
@@ -41,7 +45,7 @@ reroute = "127.0.0.1"
 
 #default
 user_username = "imcoolthanks"
-user_email = "queena1234@gmail.com"
+user_email = "wongq9999@outlook.com"
 
 @app.route("/focuz/")
 def focuz():
@@ -278,8 +282,22 @@ def unblock_all_website(email):
     conn.commit()
     conn.close()
 
+@app.route('/auth/')
+def authorize():
+    webbrowser.open('https://zoom.us/oauth/authorize?response_type=code&client_id=tf3mYOJfQWueysG7_7m_3A&redirect_uri=https://queena-wcy.herokuapp.com/home/')
 
-
+@app.route('/auth/success/?code=<code>')
+def authorize_success(code):
+    conn = http.client.HTTPSConnection("https://zoom.us/oauth/token")
+    headers = {
+        'authorization': "Basic dGYzbVlPSmZRV3VleXNHN183bV8zQTpoYnBNZUV2UHpZcUFra1g2UlF1VGVKdTZyeHZicThnSQ==",
+        'content-type': "application/x-www-form-urlencoded"
+        }
+        
+    conn.request("GET", "code="+code+"&grant_type=authorization_code&redirect_uri=https://queena-wcy.herokuapp.com/home/", headers=headers)
+    res = conn.getresponse()
+    data = res.read()
+    data = data.decode("utf-8")
 
 
 
@@ -310,7 +328,7 @@ def create_users_info():
     #DEMO user
     insert_query = """INSERT INTO user (username, email, password, icon_photo)
                                        VALUES (?,?,?,?)"""
-    cur.execute(insert_query, ("imcoolthanks", "queena1234@gmail.com", "1234", "/static/Assets/user_icons/default.jpg"))
+    cur.execute(insert_query, ("imcoolthanks", "wongq9999@outlook.com", "1234", "/static/Assets/user_icons/default.jpg"))
     print("user added")
 
     conn.commit()
@@ -368,7 +386,7 @@ def create_blocked_website():
     cur = conn.cursor()
     insert_query = """INSERT INTO blocked_website (email, url)
                                        VALUES (?,?)"""
-    cur.execute(insert_query, ("queena1234@gmail.com", "https://www.youtube.com/"))
+    cur.execute(insert_query, ("wongq9999@outlook.com", "https://www.youtube.com/"))
     print("user added")
 
     conn.commit()
@@ -442,7 +460,7 @@ def create_focus_time():
     insert_query = """INSERT INTO focus_time (email, days_ago, hours)
                                        VALUES (?,?,?)"""
     for i in range(7):                                   
-        cur.execute(insert_query, ("queena1234@gmail.com", i, i))
+        cur.execute(insert_query, ("wongq9999@outlook.com", i, i))
     print("user added")
 
     conn.commit()
