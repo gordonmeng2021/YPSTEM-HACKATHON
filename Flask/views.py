@@ -211,9 +211,10 @@ def dashboard():
     return render_template("dashboard.html", save_url=save_url)
     
 
+#After pressing buttons in setting page...
 @app.route('/setting/', methods = ["POST", "GET"])
 def unblock_or_block():
-    #Inserting into database
+    #loading from database
     def get_user_data():
         conn = sql.connect("Flask/static/Databases/database.db")
         cur = conn.cursor()
@@ -240,20 +241,21 @@ def unblock_or_block():
 
         return website, username, email, pw, int_time, days_ago, icon_pic
 
+    #pressing different buttons
     if request.method == "POST":
-        if request.form['add_website'] == 'block':
+        if request.form['add_website'] == 'block':  #add website button
             new_website = request.form['website']
             add_blocked_website(user_email,new_website)
             website, username, email, pw, int_time, days_ago, icon_pic = get_user_data()
             return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
 
-        elif request.form['add_website'] == 'unblock_all':
+        elif request.form['add_website'] == 'unblock_all':  #unblock all button
             print("Unblock all")
             unblock_all_website(user_email)  
             website, username, email, pw, int_time, days_ago, icon_pic = get_user_data()
             return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
 
-        elif request.form['add_website'] == 'unblock_one':
+        elif request.form['add_website'] == 'unblock_one':  #unblock one website button
             print("Unblock one")
             url = request.form['url']
             print("Website to be unblocked:" + url)
@@ -261,9 +263,10 @@ def unblock_or_block():
             website, username, email, pw, int_time, days_ago, icon_pic = get_user_data()
             return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
 
-    else:
+    else:   #return to setting page
         website, username, email, pw, int_time, days_ago, icon_pic = get_user_data()
         return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
+
 
 def unblock_all_website(email):
     conn = sql.connect("Flask/static/Databases/database.db")

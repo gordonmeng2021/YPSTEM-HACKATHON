@@ -9,6 +9,7 @@
 
 body {
   background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.4)), url("../static/Assets/background/first.webp");
+  background-size:cover;
 }
 
 .login-container-div .container {
