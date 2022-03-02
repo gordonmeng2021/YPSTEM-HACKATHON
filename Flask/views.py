@@ -22,7 +22,7 @@ import time
 
 #Zoom
 import webbrowser
-import http.client
+import requests
 
 @app.route("/")
 def unloggedin():
@@ -285,19 +285,25 @@ def unblock_all_website(email):
 @app.route('/auth/')
 def authorize():
     webbrowser.open('https://zoom.us/oauth/authorize?response_type=code&client_id=tf3mYOJfQWueysG7_7m_3A&redirect_uri=https://queena-wcy.herokuapp.com/home/')
+    return "Authorizing"
 
 @app.route('/auth/success/?code=<code>')
 def authorize_success(code):
-    conn = http.client.HTTPSConnection("https://zoom.us/oauth/token")
+    response = requests.get('https://api.buildkite.com/v2/organizations/orgName/pipelines/pipelineName/builds/1230', headers={ 'Authorization': 'Bearer <your_token>' })
+
+    url = "https://zoom.us/oauth/token"
+
+    payload = {'code': code, 
+                'grant_type': 'authorization_code',
+                'redirect_uri':'https://queena-wcy.herokuapp.com/home/'}
+
     headers = {
         'authorization': "Basic dGYzbVlPSmZRV3VleXNHN183bV8zQTpoYnBNZUV2UHpZcUFra1g2UlF1VGVKdTZyeHZicThnSQ==",
         'content-type': "application/x-www-form-urlencoded"
         }
         
-    conn.request("GET", "code="+code+"&grant_type=authorization_code&redirect_uri=https://queena-wcy.herokuapp.com/home/", headers=headers)
-    res = conn.getresponse()
-    data = res.read()
-    data = data.decode("utf-8")
+    r = requests.post(url, data=payload, verify=False, allow_redirects=False, headers=headers)
+    return r.text()
 
 
 
