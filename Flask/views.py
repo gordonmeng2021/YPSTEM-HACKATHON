@@ -284,7 +284,7 @@ def unblock_all_website(email):
 
 @app.route('/auth/')
 def authorize():
-    webbrowser.open('https://zoom.us/oauth/authorize?response_type=code&client_id=tf3mYOJfQWueysG7_7m_3A&redirect_uri=https://queena-wcy.herokuapp.com/home/')
+    webbrowser.open('https://zoom.us/oauth/authorize?response_type=code&client_id=tf3mYOJfQWueysG7_7m_3A&redirect_uri=https://queena-wcy.herokuapp.com/auth/success')
     return "Authorizing"
 
 @app.route('/auth/success/?code=<code>')
