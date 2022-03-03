@@ -4,173 +4,64 @@
 Home
 {% endblock %}
 
-{% block stylesheet %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css')}}" />
+{% block stylesheet %} 
+<head>
+<!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css')}}" /> -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="">
+<meta name="description" content="">
+
+<link rel="stylesheet" href="../static/homepage/css/bootstrap.min.css">
+<link rel="stylesheet" href="../static/homepage/css/font-awesome.min.css">
+<link rel="stylesheet" href="../static/homepage/css/templatemo-style.css">
+<link href='//fonts.googleapis.com/css?family=Raleway:400,300,600,700' rel='stylesheet' type='text/css'>
+</head>
 {% endblock %}
-
 {% block content %}
-<body>
-  
-  <div id="msgcontainer">
-  {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            {% for msg in messages %}
-            
-              <div id="stopmsg" >{{msg}}</div>
-        
-                
-            {% endfor %}
-          {% endif %}
-        {% endwith %}
-      </div>
-  
-  <section class="-md -sm -xl -xs u-clearfix u-image u-shading u-section-5" src="" id="carousel_3cd6">
-    <div class="u-clearfix u-sheet u-sheet-1">
-      <div alt="" class="u-border-no-bottom u-border-no-left u-border-no-right u-border-no-top u-image u-image-circle u-image-1"></div>
-      <div class="u-container-style u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-group u-group-1">
-        <div class="u-container-layout u-valign-middle u-container-layout-1">
-          <h2 class="u-align-center u-text u-text-body-color u-text-1">{{username}}</h2>
-          <p class="u-align-center u-text u-text-body-color u-text-2">subject, form, class</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<body data-spy="scroll" data-target="#rock-navigation">
+	<!-- START HOME -->
+	<section id="home" class="templatemo-home">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-2 col-sm-1"></div>
+				<div class="col-md-8 col-sm-10">
+					<h1 class="tm-home-title"><strong>Welcome to Focuz, {{user_username}}</strong></h1>
+					<h2 class="tm-home-subtitle">Ready to focus?</h2>
+          <form  action="/focuz"  method="get"> <form action="/showmsg" method="get" >
+            <button onclick="myFunc()"class="btn btn-default smoothScroll tm-view-more-btn" >FOCUZ</button>
+          </form>
+          </form>
+          <form action="/stop" method="get"> 
+            <button onclick = "stop_msg({{int_focused_time}},{{int_not_focused_time}})" class="btn btn-default smoothScroll tm-view-more-btn" >STOP</button>
+          </form>
+				</div>
+				<div class="col-md-2 col-sm-1"></div>
+			</div>
+		</div>
+	</section>
+	<!-- END HOME -->
 
+	
+	<script src="../static/homepage/js/jquery.js"></script>
+	<script src="../static/homepage/js/bootstrap.min.js"></script>
+	<script src="../static/homepage/js/smoothscroll.js"></script>
+	<script src="../static/homepage/js/jquery.nav.js"></script>
+	<script src="../static/homepage/js/isotope.js"></script>
+	<script src="../static/homepage/js/imagesloaded.min.js"></script>
+	<script src="../static/homepage/js/custom.js"></script>
 
-<!-- confirm ok -->
-  
-<section class="u-clearfix u-expand-resize u-white u-section-1" id="carousel_6171">
-  
-  <div class="u-clearfix u-sheet u-sheet-1">
-    
-    
-    <img src="static/Assets/homephoto/images/business-120.jpg"  class="u-expanded-width-xs u-image u-image-default u-image-1">
-    <div class="u-opacity u-opacity-50 u-palette-3-base u-shape u-shape-rectangle u-shape-1"></div>
-    <div class="u-container-style u-expanded-width-xs u-group u-group-1">
-      <div class="u-container-layout u-valign-middle-xs u-container-layout-1">
-        <h1 class="u-text u-text-1">Start<br>Focuzing
-        </h1>
-        <h6>Our aim is to bla bla bla bla bla</h6>
-        <h6>Our aim is to bla bla bla bla bla</h6>
-        <h6>Our aim is to bla bla bla bla bla</h6>
-        <br>
-        <br>
-        <br>
-        
-        <!-- <h6>focusing state</h6> -->
-        <!-- button -->
-        <form  action="/focuz"  method="get"> <div class="wrap"><form action="/showmsg" method="get">
-          <button onclick="myFunc()"class="button1" >FOCUZ!</button>
-        </div></form>
-        </form>
-        <form action="/stop" method="get"> <div class="wrap">
-          <button  class="button3" >STOP!</button>
-        </div>
-        </form>
-       
-      </div>
-    </div>
-  </div>
-  
-</section>
+  <script>function myFunc(){
+    window.alert("You have started FOCUZ");
+  }</script>
 
-<!-- confirm ok -->
-
-<section class="u-clearfix u-palette-3-base u-section-2" id="carousel_a220">
-  <div class="u-clearfix u-sheet u-sheet-1">
-    <img src="static/Assets/homephoto/images/pexels-pixabay-38568.jpg"  class="u-image u-image-default u-image-1"data-image-width="600" data-image-height="700">
-    <img src="static/Assets/homephoto/images/pexels-liza-summer-6347901.jpg"  class="u-image u-image-default u-image-2" data-image-width="600" data-image-height="700">
-    <div class="u-container-style u-expanded-width-xs u-group u-group-1">
-      <div class="u-container-layout u-container-layout-1">
-        <h3 class="u-text u-text-1">Want to block some website?</h3>
-        <p class="u-text u-text-2">You can block to prevent bla  bla bla bla.</p>
-
-        <!-- block website navigation -->
-        <form action="/setting" method="get"><div class="wrap">
-          <button class="button2">Block Website</button>
-        </div></form>
-        
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- lucky draw -->
-<section class="u-clearfix u-section-7" id="carousel_7583">
-  <div class="u-clearfix u-sheet u-sheet-1">
-    <div class="u-align-center u-container-style u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-group u-group-1">
-      <div class="u-container-layout u-valign-middle">
-        <h1 class="u-text u-text-1">LUCKY DRAW</h1>
-      </div>
-    </div>
-    <div class="u-clearfix u-expanded-width u-gutter-30 u-layout-wrap u-layout-wrap-1">
-      <div class="u-gutter-0 u-layout">
-        <div class="u-layout-col">
-          <div class="u-size-20">
-            <div class="u-layout-row">
-              <div class="u-align-center u-container-style u-image u-layout-cell u-left-cell u-size-26 u-image-1">
-                <div class="u-container-layout"></div>
-              </div>
-              <div class="u-container-style u-image u-layout-cell u-right-cell u-size-34 u-image-2">
-                <div class="u-container-layout"></div>
-              </div>
-            </div>
-          </div>
-          <div class="u-size-20">
-            <div class="u-layout-row">
-              <div class="u-align-center u-container-style u-image u-layout-cell u-left-cell u-size-20 u-size-30-md u-image-3">
-                <div class="u-container-layout"></div>
-              </div>
-              <div class="u-align-center u-container-style u-layout-cell u-size-20 u-size-30-md u-white u-layout-cell-4">
-                <div class="u-container-layout u-container-layout-5">
-                  <p class="u-text u-text-2">There are many flowers that are waiting for you to get!! </p>
-                  <form action="/luckydraw" method="get"><div class="wrap">
-                    <button class="button2">Lucky Draw</button>
-                  </div></form>
-                  
-                </div>
-              </div>
-              <div class="u-container-style u-image u-layout-cell u-right-cell u-size-20 u-size-60-md u-image-4">
-                <div class="u-container-layout"></div>
-              </div>
-            </div>
-          </div>
-          <div class="u-size-20">
-            <div class="u-layout-row">
-              <div class="u-container-style u-image u-layout-cell u-left-cell u-size-33 u-image-5">
-                <div class="u-container-layout"></div>
-              </div>
-              <div class="u-container-style u-image u-layout-cell u-right-cell u-size-27 u-image-6">
-                <div class="u-container-layout"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- button2 -->
-    <!-- <a href="https://www.ktmerry.com/" class="u-btn u-button-style u-btn-1" title="learn more">learn more</a> -->
-  </div>
-</section>
-<section class="u-clearfix u-image u-section-8" id="carousel_eb36">
-  <div class="u-clearfix u-sheet u-sheet-1">
-    <div class="u-align-center u-container-style u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-group u-group-1">
-      <div class="u-container-layout u-valign-middle u-container-layout-1">
-        <p class="u-text u-text-1">"Tracking page is always your target"</p>
-        <p class="u-text u-text-2">Tracking</p>
-        <div class="wrap">
-          <button class="button2">Tracking Page</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<script>function myFunc(){
-  window.alert("You have started FOCUZ");
-}</script>
+  <script>
+    function stop_msg(int_focused_time,int_not_focused_time){
+      window.alert(
+      "You have stopped FOCUZ \n You have focused " + int_focused_time + " seconds \n You have not focused " + int_not_focused_time +" seconds")
+    }
+  </script>
 </body>
 
 

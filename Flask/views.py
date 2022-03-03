@@ -1,11 +1,12 @@
 #Contains the routings and the view functions
+import email
 import re
 from datetime import datetime
-
+import json
 from sys import flags
+from tkinter import commondialog
 
-
-from flask import Flask, render_template, request, redirect, flash
+from flask import Flask, render_template, request, flash
 
 from . import app
 
@@ -20,18 +21,14 @@ import cv2
 from threading import *
 import time
 
-#Zoom
-import webbrowser
-import requests
 
 @app.route("/")
 def unloggedin():
     return render_template("unloggedin.html")
 
-@app.route("/home/")
-def home():
-    username = "imcoolthanks"
-    return render_template("home.html",username=username)
+# @app.route("/home/")
+# def home():
+#     return render_template("home.html")
 
 #---------------------------------open focusing function
 #*******the time they focus
@@ -121,15 +118,16 @@ def stop():
     flash("You have focused : "+ str(int(focusedTime))+'s')
     flash("You have not focused : "+ str(int(notfocusedTime))+'s')
     
+    int_focused_time = str(int(focusedTime))
+    int_not_focused_time = str(int(notfocusedTime))
     #Inserting into database
     conn = sql.connect("Flask/static/Databases/database.db")
     cur = conn.cursor()
 
-    query = "INSERT INTO focus_time VALUES (?,?,?)"
-    cur.execute(query, [user_email, 0 , focusedTime])
+    query = "UPDATE focus_time SET hours = hours + ? where email = ? and days_ago = 0"
+    cur.execute(query, (int(focusedTime), user_email))
 
     conn.commit()
-
     conn.close()
 
     with open(hostsPath, 'w') as file:
@@ -161,7 +159,7 @@ def stop():
     focusedTime=0
     notfocusedTime=0 
     
-    return render_template("home.html")
+    return render_template("home.html", int_focused_time = json.dumps(int_focused_time), int_not_focused_time = json.dumps(int_not_focused_time))
 
 @app.route("/puzzle/")
 def puzzle():
@@ -203,7 +201,7 @@ def login():
             user_username = get_username(email)
             user_email = email
 
-            return render_template("home.html")
+            return render_template("home.html", user_username = user_username)
         else:
             return render_template('login.html', error="Incorrect email or password.")
 
@@ -224,9 +222,9 @@ def unblock_or_block():
         cur = conn.cursor()
 
         user_data = '''SELECT username, user.email, password, SUM(hours), MAX(days_ago), icon_photo FROM focus_time, user 
-        WHERE focus_time.email = user.email '''
+        WHERE focus_time.email = user.email and user.email = ?'''
 
-        cur.execute(user_data)
+        cur.execute(user_data, (user_email,))
 
         row = cur.fetchall()
 
@@ -282,28 +280,6 @@ def unblock_all_website(email):
     conn.commit()
     conn.close()
 
-@app.route('/auth/')
-def authorize():
-    webbrowser.open('https://zoom.us/oauth/authorize?response_type=code&client_id=tf3mYOJfQWueysG7_7m_3A&redirect_uri=https://queena-wcy.herokuapp.com/auth/success')
-    return "Authorizing"
-
-@app.route('/auth/success/?code=<code>')
-def authorize_success(code):
-    response = requests.get('https://api.buildkite.com/v2/organizations/orgName/pipelines/pipelineName/builds/1230', headers={ 'Authorization': 'Bearer <your_token>' })
-
-    url = "https://zoom.us/oauth/token"
-
-    payload = {'code': code, 
-                'grant_type': 'authorization_code',
-                'redirect_uri':'https://queena-wcy.herokuapp.com/home/'}
-
-    headers = {
-        'authorization': "Basic dGYzbVlPSmZRV3VleXNHN183bV8zQTpoYnBNZUV2UHpZcUFra1g2UlF1VGVKdTZyeHZicThnSQ==",
-        'content-type': "application/x-www-form-urlencoded"
-        }
-        
-    r = requests.post(url, data=payload, verify=False, allow_redirects=False, headers=headers)
-    return r.text()
 
 
 
@@ -603,4 +579,5 @@ def reset_database():
     create_focus_time()
     create_users_info()
     list_all()
+
 
