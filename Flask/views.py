@@ -26,9 +26,9 @@ import time
 def unloggedin():
     return render_template("unloggedin.html")
 
-# @app.route("/home/")
-# def home():
-#     return render_template("home.html")
+@app.route("/home/")
+def home():
+    return render_template("home.html", user_username = user_username)
 
 #---------------------------------open focusing function
 #*******the time they focus
@@ -159,7 +159,7 @@ def stop():
     focusedTime=0
     notfocusedTime=0 
     
-    return render_template("home.html", int_focused_time = json.dumps(int_focused_time), int_not_focused_time = json.dumps(int_not_focused_time))
+    return render_template("home.html", int_focused_time = json.dumps(int_focused_time), int_not_focused_time = json.dumps(int_not_focused_time), user_username=user_username)
 
 @app.route("/puzzle/")
 def puzzle():
