@@ -111,14 +111,14 @@ def stop():
 def luckydraw():
     return render_template("luckydraw.html")
 
-@app.route("/setting")
-def setting():
-    username = "imcoolthanks"
-    email = "queena1234@gmail.com"
-    pw = "1234"
-    website = get_blocked_website_list(email)
-    print(website)
-    return render_template("setting.html", username=username, email=email, password=pw, website=website)
+    row = cur.fetchall()
+    int_row = int(row[0][0])
+    conn.commit()
+
+    conn.close()
+
+    hours = 25
+    return render_template("luckydraw.html", int_row = int_row, hours = hours, imgpath = "../static/Assets/luckydraw/puzzle1-S.jpg")
 
 
 @app.route("/login/", methods = ['POST', 'GET'])
