@@ -117,45 +117,6 @@ def stop():
     flash("You have stopped FOCUZ","info")
     flash("You have focused : "+ str(int(focusedTime))+'s')
     flash("You have not focused : "+ str(int(notfocusedTime))+'s')
-<<<<<<< HEAD
-    focusedTime=0
-    notfocusedTime=0  
-    return render_template("home.html")
-
-
-@app.route("/luckydraw")
-def luckydraw():
-    return render_template("luckydraw.html")
-
-    row = cur.fetchall()
-    int_row = int(row[0][0])
-    conn.commit()
-
-    conn.close()
-
-    hours = 25
-    return render_template("luckydraw.html", int_row = int_row, hours = hours, imgpath = "../static/Assets/luckydraw/puzzle1-S.jpg")
-
-
-@app.route("/login/", methods = ['POST', 'GET'])
-def login():
-    if request.method == 'POST':
-        email = request.form.get('email') 
-        password = request.form.get('password')
-
-        success = login(email, password)
-        
-        if success:
-            username = get_username(email)
-            print(username)
-            return render_template("home.html")
-        else:
-            return render_template("error.html")
-
-    return render_template('login.html')
-
-=======
->>>>>>> a90682b5f7952a228abef512cdb4c0ba4f3325e6
     
     int_focused_time = str(int(focusedTime))
     int_not_focused_time = str(int(notfocusedTime))
