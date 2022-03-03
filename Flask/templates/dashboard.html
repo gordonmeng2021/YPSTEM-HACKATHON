@@ -1,0 +1,134 @@
+{% extends "base_layout.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='dashboard.css')}}"></link>
+{% endblock %}
+
+{% block content %}
+    <!-- Dashboard -->
+    <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
+        <!-- Main content -->
+        <div class="h-screen flex-grow-1 overflow-y-lg-auto">
+            <!-- Header -->
+            <header class="bg-surface-primary border-bottom pt-6">
+                <div class="container-fluid">
+                    <div class="mb-npx">
+                        <div class="row align-items-center">
+                            <div class="col-sm-6 col-12 mb-4 mb-sm-0">
+                                <!-- Title -->
+                                <h3 class="h2 mb-0 ls-tight" style="padding-bottom: 20px;">Analytics</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- Main -->
+            <main class="py-6 bg-surface-secondary">
+                <div class="container-fluid">
+                    <!-- Card stats -->
+                    <div class="row g-6 mb-6">
+                        <div class="col-xl-3 col-sm-6 col-12">
+                            <div class="card shadow border-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Total Focus Time</span>
+                                            <span class="h3 font-bold mb-0">0</span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle">
+                                                <i class="bi bi-calendar-check"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 mb-0 text-sm">
+                                        <span class="badge badge-pill bg-soft-success text-success me-2">
+                                            <i class="bi bi-arrow-up me-1"></i>13%
+                                        </span>
+                                        <span class="text-nowrap text-xs text-muted">Since last month</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 col-12">
+                            <div class="card shadow border-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Focus Time Today</span>
+                                            <span class="h3 font-bold mb-0">0</span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
+                                                <i class="bi bi-clock"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 mb-0 text-sm">
+                                        <span class="badge badge-pill bg-soft-success text-success me-2">
+                                            <i class="bi bi-arrow-up me-1"></i>30%
+                                        </span>
+                                        <span class="text-nowrap text-xs text-muted">Since yesterday</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 col-12">
+                            <div class="card shadow border-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Presence</span>
+                                            <span class="h3 font-bold mb-0">50%</span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-info text-white text-lg rounded-circle">
+                                                <i class="bi bi-person-fill"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 mb-0 text-sm">
+                                        <span class="badge badge-pill bg-soft-danger text-danger me-2">
+                                            <i class="bi bi-arrow-down me-1"></i>20
+                                        </span>
+                                        <span class="text-nowrap text-xs text-muted">In your class</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 col-12">
+                            <div class="card shadow border-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Puzzles Completed</span>
+                                            <span class="h3 font-bold mb-0">5</span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-warning text-white text-lg rounded-circle">
+                                                <i class="bi bi-puzzle-fill"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 mb-0 text-sm">
+                                        <span class="badge badge-pill bg-soft-success text-success me-2">
+                                            5 <!--rank-->
+                                        </span>
+                                        <span class="text-nowrap text-xs text-muted">In your class</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card shadow border-0 mb-7">
+                        <img style="padding:5em;" src="{{ url_for('static', filename=save_url)}}">
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+{% endblock %}

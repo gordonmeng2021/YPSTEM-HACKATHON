@@ -1,3 +1,5 @@
+from cgitb import reset
+from operator import rshift
 import sqlite3 as sql
 
 #Plot graph imports
@@ -18,7 +20,7 @@ def create_users_info():
     #DEMO user
     insert_query = """INSERT INTO user (username, email, password, icon_photo)
                                        VALUES (?,?,?,?)"""
-    cur.execute(insert_query, ("imcoolthanks", "queena1234@gmail.com", "1234", "/static/Assets/user_icons/default.jpg"))
+    cur.execute(insert_query, ("imcoolthanks", "wongq9999@outlook.com", "1234", "/static/Assets/user_icons/default.jpg"))
     print("user added")
 
     conn.commit()
@@ -73,7 +75,7 @@ def create_blocked_website():
     cur = conn.cursor()
     insert_query = """INSERT INTO blocked_website (email, url)
                                        VALUES (?,?)"""
-    cur.execute(insert_query, ("queena1234@gmail.com", "https://www.youtube.com/"))
+    cur.execute(insert_query, ("wongq9999@outlook.com", "https://www.youtube.com/"))
     print("user added")
 
     conn.commit()
@@ -142,7 +144,7 @@ def create_focus_time():
     insert_query = """INSERT INTO focus_time (email, days_ago, hours)
                                        VALUES (?,?,?)"""
     for i in range(7):                                   
-        cur.execute(insert_query, ("queena1234@gmail.com", i, i))
+        cur.execute(insert_query, ("wongq9999@outlook.com", i, i))
     print("user added")
 
     conn.commit()

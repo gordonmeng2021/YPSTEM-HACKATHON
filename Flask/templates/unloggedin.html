@@ -1,61 +1,302 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lora:700|PT+Sans:400,400i,700"></link>
-        <link rel="stylesheet" type="text/css" href="../static/unloggedin.css"></link> 
-    </head>
-
-    <body>
-        <div class="login-div">
-            <a class="button1" href="/login" role="button">Login/Signup</a>
+<html lang="en">
+<head>
+    <!-- Metas -->
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="LionCoders" />
+    <!-- Links -->
+    <link rel="icon" type="image/png" href="../static/unloggedin/images/favicon.png" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/../static/unloggedin/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/unloggedin/css/icofont.min.css">
+    <link href="../static/unloggedin/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../static/unloggedin/css/slick.css" rel="stylesheet" />
+    <link href="../static/unloggedin/css/main.css" rel="stylesheet" />
+    <!-- Document Title -->
+    <title>Focuz</title>
+</head>
+<body>
+  <!-- HEADER SECTION -->  
+  <header id="home">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light ">
+        <!-- Change Logo Img Here -->
+        <a class="navbar-brand" href="#"><img src="../static/Assets/icons/logo.jpg" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <div class="interactive-menu-button">
+            <a href="#">
+              <span>Menu</span>
+            </a>
+          </div>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <!-- Nav Link -->
+              <a class="nav-link" data-scroll="" href="#home">Home.<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <!-- Nav Link -->
+              <a class="nav-link" data-scroll="" href="#about-us">About Us.</a>
+            </li>
+            <li class="nav-item">
+              <!-- Nav Link -->
+              <a class="nav-link" data-scroll="" href="#portfolio">Portfolio.</a>
+            </li>
+            <li class="nav-item">
+              <!-- Nav Link -->
+              <a class="nav-link" data-scroll="" href="#blog">Leaderboard.</a>
+            </li>
+          </ul>
+          <form data-scroll="" href="#contact-us" class="contact-btn form-inline my-2 my-lg-0">
+            <!-- Contacgt Us Button -->
+            <button><a href="/login/">Sign Up/Login</a></button>
+          </form>
         </div>
-
-        <div class="container out" style="padding:0">
-            <section class="first-container">
-                <h1 class="title">Focuz</h1>
-            </section>
-
-            <section class="second-container">
-                <p class="fade">Have you ever had a rough time focusing in class?</p>
-            </section>
-
-            <section class="third-container">
-                <div class="laptop-bg" style="height:100%; width:50%">
-                    <p class="fade">Find yourself wandering to various websites?</p>
-                </div>
-                <div class="clock-bg" style="height:100%; width:50%">
-                    <p class="fade">Staring at the clock?</p>
-                </div>
-            </section>
-
-            <section>
-                <h2 class="fade" style="padding-top:40vh">Counting the seconds down</h2>
-            </section>
-
-            <section class="countdown-container">
-                <p class="fade">3</p>
-                <p class="fade">2</p>
-                <p class="fade">1</p>
-            </section>
-
-            <section style="height:80vh">
-                <h2 style="padding-top: 6em;" class="fade">However, don't fret.</h2>
-                <p class="fade">As we have the perfect the solution for you.</p>
-            </section>
-
-            <h2 class="fade">FOCUZ</h2>
-            <p class="fade">An app designed to help you concentrate in the straining online lessons, allowing you to achieve your maximum potential even in the height of the global pandemic. </p>
-            <p class="fade">Through cutting-edge technology, we provide you with the optimum environment for perfect study. </p>
-
-            <h2 class="fade">What are you waiting for?</h2>
-            <p class="fade">Sign up today for an unforgettable date with your lovely textbooks.</p>
-            <div style="text-align: center">
-                <a style="margin-top: 60px;" class="button1" href="/login" role="button">Login/Signup</a>
+      </nav>
+    </div>
+    <!-- HERO SECTION -->    
+    <div class="container-fluid hero" style="min-height: 600px;">
+      <img src="../static/unloggedin/images/hero.svg" alt="">
+      <div class="container">
+        <!-- Hero Title -->
+        <h1>Focuz</h1>
+        <!-- Hero Title Info -->
+        <p>Remove distractions during online lessons.<br> Help you unlock your full potential.</p>
+        <div class="hero-btns">
+          <!-- Hero Btn First -->
+          <a data-scroll href="#about-us">More About us</a>
+          <!-- Hero Btn Second -->
+          <a data-scroll href="/login/">Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- SERVICES SECTION -->  
+  <section id="about-us" class="services">
+    <div class="container-fluid">
+      <div class="side-img"> 
+        <img src="../static/unloggedin/images/aside.svg" alt="">
+      </div>
+      <div class="side2-img"> 
+        <img src="../static/unloggedin/images/aside2.svg" alt="">
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-sm-12 col-lg-4 service-txt">
+            <h2>Anything you need,we’ve got you covered</h2>
+            <div class="hero-btns service-btn">
+              <a data-scroll href="/login/">Sign Up</a>
             </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="service-box">
+              <img src="../static/unloggedin/images/service-icon1.svg" alt="">
+              <!-- Service Title -->
+              <h3>Website Blocking</h3>
+              <!-- Replace Patch to Image Under -->
+              <p>Blocks certain websites to remove notifications to help you better concentrate in online lessons.</p>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="service-box">
+              <img src="../static/unloggedin/images/service-icon2.svg" alt="">
+              <!-- Service Title -->
+              <h3>Focus Detector</h3>
+              <!-- Service Info -->
+              <p>Record time you have spent focusing using artifical intelligence, allowing you to monitor your progress.</p>
+            </div>
+          </div>
         </div>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>   
-        <script src="../static/unloggedin.js"></script>
-    </body>
+      </div>
+    </div>
+  </section>
+  <!-- ABOUT SECTION -->
+  <section class="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-lg-6">
+          <img src="../static/unloggedin/images/aboutimg.svg" alt="">
+        </div>
+        <div class="col-12 col-sm-12 col-lg-6">
+          <h5>Inspiration</h5>
+          <h2>Why Did<br>We Make This?</h2>
+          <!-- Replace About Us Text Under -->
+          <p>Help fill this in thanks
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- PORTFOLIO SECTION -->
+  <section id="portfolio" class="portfolio">
+    <div class="container-fluid">
+      <div class="portfolio-aside">
+        <img src="../static/unloggedin/images/aside3.svg" alt="">
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h2>Our Application</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-4 work-box">
+            <div class="photobox photobox_type10">
+                <div class="photobox__previewbox">
+                  <!-- Replace Patch to Image Under -->
+                  <img src="../static/unloggedin/images/1.png" class="photobox__preview" alt="Preview">
+                  <!-- Replace Image Title Under -->
+                  <span class="photobox__label">Home</span>
+                </div>
+              </div>
+          </div>
+          <div class="col-12 col-lg-4 work-box">
+            <div class="photobox photobox_type10">
+                <div class="photobox__previewbox">
+                  <!-- Replace Patch to Image Under -->
+                  <img src="../static/unloggedin/images/2.png" class="photobox__preview" alt="Preview">
+                  <!-- Replace Image Title Under -->
+                  <span class="photobox__label">Awesome Work</span>
+                </div>
+              </div>
+          </div>
+          <div class="col-12 col-lg-4 work-box">
+            <div class="photobox photobox_type10">
+                <div class="photobox__previewbox">
+                  <!-- Replace Patch to Image Under -->
+                  <img src="../static/unloggedin/images/3.png" class="photobox__preview" alt="Preview">
+                  <!-- Replace Image Title Under -->
+                  <span class="photobox__label">Awesome Work</span>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- BLOG SECTION -->
+  <section id="blog" class="blog">
+    <div class="container-fluid">
+      <div class="blog-aside">
+        <img src="../static/unloggedin/images/aside4.svg" alt="">
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h5>Leaderboard</h5>
+            <h2>Top Achievers</h2>
+          </div>
+        </div>
+        <div id="blog-drag" class="row blog-slider">
+          <div class="col-12 col-lg-4 blog-box">
+            <div class="achiever-card">
+              <img class="medal" src="../static/unloggedin/images/gold.png">
+              <div class="text">
+                  <img class="blog-first" src="https://www.shareicon.net/data/512x512/2016/09/15/829452_user_512x512.png" alt="">
+                  <h3>User Name</h3>
+              </div>
+              <div class="links">
+                <a target="_blank" href="#">Check them out!</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4 blog-box">
+            <div class="achiever-card">
+              <img class="medal" src="../static/unloggedin/images/silver.png">
+              <div class="text">
+                  <img class="blog-second" src="https://www.shareicon.net/data/512x512/2016/09/15/829452_user_512x512.png" alt="">
+                  <h3>User Name</h3>
+              </div>
+              <div class="links">
+                <a target="_blank" href="#">Check them out!</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4 blog-box">
+            <!-- Blog Post Title -->
+            <div class="achiever-card">
+              <img class="medal" src="../static/unloggedin/images/bronze.png">
+              <div class="text">
+                  <img class="blog-third" src="https://www.shareicon.net/data/512x512/2016/09/15/829452_user_512x512.png" alt="">
+                  <h3>User Name</h3>
+              </div>
+              <div class="links">
+                  <a target="_blank" href="#">Check them out!</a>
+              </div>
+            </div>
+          </div>
+          <!-- Blog Section to be showed on Drag  -->
+          <div class="col-12 col-lg-4 blog-box hiden-blog hide-blog">
+            <div class="achiever-card">
+              <div class="text">
+                  <img src="https://www.shareicon.net/data/512x512/2016/09/15/829452_user_512x512.png" alt="">
+                  <h3>User Name</h3>
+              </div>
+              <div class="links">
+                <a target="_blank" href="#">Check them out!</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4 blog-box hiden-blog  hide-blog">
+            <!-- Blog Post Title -->
+            <div class="achiever-card">
+              <div class="text">
+                  <img src="https://www.shareicon.net/data/512x512/2016/09/15/829452_user_512x512.png" alt="">
+                  <h3>User Name</h3>
+              </div>
+              <div class="links">
+                <a target="_blank" href="#">Check them out!</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4 blog-box hiden-blog  hide-blog">
+            <!-- Blog Post Title -->
+            <div class="achiever-card">
+              <div class="text">
+                  <img src="https://www.shareicon.net/data/512x512/2016/09/15/829452_user_512x512.png" alt="">
+                  <h3>User Name</h3>
+              </div>
+              <div class="links">
+                <a target="_blank" href="#">Check them out!</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Blog Button to Show More or Less on Mobile&Tablet View  -->
+        <button class="hide-me" id="blog-btn">Show More Stories</button>
+      </div>
+    </div>
+  </section>  
+  <!-- FOOTER SECTION -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <ul class="contact-nav">
+            <li><a data-scroll href="#home">Home.</a></li>
+            <li><a data-scroll href="#about-us">About Us.</a></li>
+            <li><a data-scroll href="#portfolio">Portfolio.</a></li>
+            <li><a data-scroll href="#blog">Leaderboard.</a></li>
+          </ul>
+          <h6>© 2019 - Focuz</h6>
+          <ul class="social">
+            <li><a href="#"><i class="icofont-facebook"></i></a></li>
+            <li><a href="#"><i class="icofont-twitter"></i></a></li>
+            <li><a href="#"><i class="icofont-dribbble"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+  <script src="../static/unloggedin/js/bootstrap.min.js"></script>
+  <script src="../static/unloggedin/js/slick.min.js"></script>
+  <script src="../static/unloggedin/js/smooth-scroll.min.js"></script>
+  <script src="../static/unloggedin/js/main.js"></script>
+  <!-- Scripts Ends -->
+</body>
 </html>

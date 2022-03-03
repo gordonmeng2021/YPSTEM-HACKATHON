@@ -1,12 +1,12 @@
 #Contains the routings and the view functions
-from os import remove
+import email
 import re
 from datetime import datetime
+import json
 from sys import flags
+from tkinter import commondialog
 
-
-from flask import Flask, render_template, request, redirect, flash
-from numpy import delete
+from flask import Flask, render_template, request, flash
 
 from . import app
 
@@ -21,39 +21,54 @@ import cv2
 from threading import *
 import time
 
+
 @app.route("/")
 def unloggedin():
     return render_template("unloggedin.html")
 
 @app.route("/home/")
 def home():
-    # print("helllloooooo")
-    return render_template("home.html")
+    return render_template("home.html", user_username = user_username)
 
 #---------------------------------open focusing function
 #*******the time they focus
 
 focusedTime = 0
 notfocusedTime = 0
+#Get block website info
+#Hostpath
+hostsPath = r"C:\Windows\System32\drivers\etc\hosts"
+reroute = "127.0.0.1"
 
-@app.route("/focuz")
+#default
+user_username = "imcoolthanks"
+user_email = "wongq9999@outlook.com"
+
+@app.route("/focuz/")
 def focuz():
-     
+    print("Focuz running")
     face_cascade = cv2.CascadeClassifier('Flask/haarcascade_frontalface_default.xml')
     cap = cv2.VideoCapture(0)
+
+
+    def start_blocking():
+        with open(hostsPath, 'r+') as file:
+            content = file.read()
+            for site in get_blocked_website_list(user_email):
+                if site in content:
+                    pass
+                else:
+                    file.write(reroute + " " + site + "\n")
 
     def focus():
         global isFocus
         isFocus = True
     
-      
     def run():
         
         global isFocus,focusedTime,notfocusedTime,state
         state= True
-        
-        
-            
+    
         while state:
              
             startTimer=time.time()
@@ -88,20 +103,21 @@ def focuz():
                 break
     
     
-
+    start_blocking()
     run()
     # print("You have focused :", str(int(focusedTime)),'s')
     # print("You have not focused :", str(int(notfocusedTime)),'s')  
     return "Get back to continue"
 
     
-@app.route("/stop")
+@app.route("/stop/")
 def stop():
     global state,focusedTime,notfocusedTime
     state=False
     flash("You have stopped FOCUZ","info")
     flash("You have focused : "+ str(int(focusedTime))+'s')
     flash("You have not focused : "+ str(int(notfocusedTime))+'s')
+<<<<<<< HEAD
     focusedTime=0
     notfocusedTime=0  
     return render_template("home.html")
@@ -138,79 +154,23 @@ def login():
 
     return render_template('login.html')
 
+=======
+>>>>>>> a90682b5f7952a228abef512cdb4c0ba4f3325e6
     
-    
-
-#Get block website info
-#Hostpath
-hostsPath = r"C:\Windows\System32\drivers\etc\hosts"
-reroute = "127.0.0.1"
-
-
-
-@app.route('/setting', methods = ["POST", "GET"])
-def unblock_or_block():
-    website = get_blocked_website_list("queena1234@gmail.com")
-    if request.method == "POST":
-        if request.form['add_website'] == 'block':
-            add_website()
-            return render_template("setting.html", website = website)
-        elif request.form['add_website'] == 'unblock':
-            unblock_website()
-            return render_template("setting.html")
-        elif request.form['add_website'] == 'unblock_all':
-            unblock_all_website()  
-            return render_template("setting.html", website = website)
-        else:
-            return render_template("setting.html", website = website)
-    else:
-        return render_template("setting.html", website = website)
-    
-
-# @app.route('/setting', methods = ["POST", "GET"])
-def add_website():
-    website = get_blocked_website_list("queena1234@gmail.com")
-    new_website = request.form['website']
-    
-    add_blocked_website("queena1234@gmail.com",new_website)
-
-    with open(hostsPath, 'r+') as file:
-        content = file.read()
-        for site in get_blocked_website_list("queena1234@gmail.com"):
-            if site in content:
-                pass
-            else:
-                file.write(reroute + " " + site + "\n")
-        return render_template("setting.html", website = website)
-
-
-@app.route('/delete/<int:id>')
-def unblock_website(id):   
+    int_focused_time = str(int(focusedTime))
+    int_not_focused_time = str(int(notfocusedTime))
+    #Inserting into database
     conn = sql.connect("Flask/static/Databases/database.db")
     cur = conn.cursor()
 
+    query = "UPDATE focus_time SET hours = hours + ? where email = ? and days_ago = 0"
+    cur.execute(query, (int(focusedTime), user_email))
 
-    delete_query = "DELETE FROM blocked_website WHERE id = ?"
-    website_id = "SELECT id , url FROM blocked_website"
-    cur.execute(delete_query, (id))
-    cur.execute(website_id)
     conn.commit()
-
     conn.close()
-    return render_template("setting.html", delete_query = delete_query, website_id = website_id)
 
-def unblock_all_website():
-        conn = sql.connect("Flask/static/Databases/database.db")
-        cur = conn.cursor()
-
-        delete_query = "DELETE FROM blocked_website WHERE email = ?"
-        cur.execute(delete_query, ["queena1234@gmail.com"])
-        conn.commit()
-
-        conn.close()
-
-        with open(hostsPath, 'w') as file:
-            file.write(
+    with open(hostsPath, 'w') as file:
+        file.write(
 '''# Copyright (c) 1993-2009 Microsoft Corp.
 #
 # This is a sample HOSTS file used by Microsoft TCP/IP for Windows.
@@ -235,6 +195,131 @@ def unblock_all_website():
 
 ''')
 
+    focusedTime=0
+    notfocusedTime=0 
+    
+    return render_template("home.html", int_focused_time = json.dumps(int_focused_time), int_not_focused_time = json.dumps(int_not_focused_time), user_username=user_username)
+
+@app.route("/puzzle/")
+def puzzle():
+    print("dfdfdfdfdfdfdf")
+    
+    return render_template("luckydraw.html",imgpath= "static/Assets/luckydraw/puzzle1-S.jpg")
+
+@app.route("/luckydraw/")
+def luckydraw():
+    #Inserting into database
+    conn = sql.connect("Flask/static/Databases/database.db")
+    cur = conn.cursor()
+
+    query = "INSERT INTO focus_time VALUES (?,?,?)"
+    sum_time = "SELECT SUM(hours) FROM focus_time"
+    cur.execute(query, [user_email, 0 , focusedTime])
+    cur.execute(sum_time)
+
+    row = cur.fetchall()
+    int_row = int(row[0][0])
+    conn.commit()
+
+    conn.close()
+    return render_template("luckydraw.html", int_row = int_row)
+
+
+@app.route("/login/", methods = ['POST', 'GET'])
+def login():                
+    if request.method == 'POST':
+        global user_email
+        global user_username
+
+        email = request.form.get('email') 
+        password = request.form.get('password')
+
+        success = login(email, password)
+        
+        if success:
+            user_username = get_username(email)
+            user_email = email
+
+            return render_template("home.html", user_username = user_username)
+        else:
+            return render_template('login.html', error="Incorrect email or password.")
+
+    return render_template('login.html')
+
+@app.route("/dashboard/")
+def dashboard():
+    save_url = graph(user_email)
+    return render_template("dashboard.html", save_url=save_url)
+    
+
+#After pressing buttons in setting page...
+@app.route('/setting/', methods = ["POST", "GET"])
+def unblock_or_block():
+    #loading from database
+    def get_user_data():
+        conn = sql.connect("Flask/static/Databases/database.db")
+        cur = conn.cursor()
+
+        user_data = '''SELECT username, user.email, password, SUM(hours), MAX(days_ago), icon_photo FROM focus_time, user 
+        WHERE focus_time.email = user.email and user.email = ?'''
+
+        cur.execute(user_data, (user_email,))
+
+        row = cur.fetchall()
+
+        conn.commit()
+
+        username = row[0][0]
+        email = row[0][1]
+        pw = row[0][2]
+        int_time = int(row[0][3])
+        days_ago = row[0][4]
+        icon_pic = row[0][5]
+        #change to email
+        website = get_blocked_website_list(user_email)
+
+        conn.close()
+
+        return website, username, email, pw, int_time, days_ago, icon_pic
+
+    #pressing different buttons
+    if request.method == "POST":
+        if request.form['add_website'] == 'block':  #add website button
+            new_website = request.form['website']
+            add_blocked_website(user_email,new_website)
+            website, username, email, pw, int_time, days_ago, icon_pic = get_user_data()
+            return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
+
+        elif request.form['add_website'] == 'unblock_all':  #unblock all button
+            print("Unblock all")
+            unblock_all_website(user_email)  
+            website, username, email, pw, int_time, days_ago, icon_pic = get_user_data()
+            return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
+
+        elif request.form['add_website'] == 'unblock_one':  #unblock one website button
+            print("Unblock one")
+            url = request.form['url']
+            print("Website to be unblocked:" + url)
+            remove_blocked_website(user_email,url)
+            website, username, email, pw, int_time, days_ago, icon_pic = get_user_data()
+            return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
+
+    else:   #return to setting page
+        website, username, email, pw, int_time, days_ago, icon_pic = get_user_data()
+        return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
+
+
+def unblock_all_website(email):
+    conn = sql.connect("Flask/static/Databases/database.db")
+    cur = conn.cursor()
+
+    delete_query = "DELETE FROM blocked_website WHERE email = ?"
+    cur.execute(delete_query, (email,))
+
+    conn.commit()
+    conn.close()
+
+
 
 
 
@@ -244,7 +329,7 @@ def unblock_all_website():
 
 
     
-            
+        
             
     
 
@@ -264,7 +349,7 @@ def create_users_info():
     #DEMO user
     insert_query = """INSERT INTO user (username, email, password, icon_photo)
                                        VALUES (?,?,?,?)"""
-    cur.execute(insert_query, ("imcoolthanks", "queena1234@gmail.com", "1234", "/static/Assets/user_icons/default.jpg"))
+    cur.execute(insert_query, ("imcoolthanks", "wongq9999@outlook.com", "1234", "/static/Assets/user_icons/default.jpg"))
     print("user added")
 
     conn.commit()
@@ -315,14 +400,14 @@ def create_blocked_website():
 
     #Create table
     #email,seq_no,url
-    conn.execute("""CREATE TABLE blocked_website (id INTEGER AUTO INCREMENT, email TEXT, url TEXT )""")
+    conn.execute("""CREATE TABLE blocked_website (email TEXT, url TEXT )""")
     print("table created")
 
     #DEMO 
     cur = conn.cursor()
     insert_query = """INSERT INTO blocked_website (email, url)
                                        VALUES (?,?)"""
-    cur.execute(insert_query, ("queena1234@gmail.com", "https://www.youtube.com/"))
+    cur.execute(insert_query, ("wongq9999@outlook.com", "https://www.youtube.com/"))
     print("user added")
 
     conn.commit()
@@ -355,6 +440,10 @@ def get_blocked_website_list(email):
 def add_blocked_website(email, url):
     conn = sql.connect("Flask/static/Databases/database.db")
     cur = conn.cursor()
+
+    websites = get_blocked_website_list(email)
+    if url in websites:
+        return
 
     insert_query = """INSERT INTO blocked_website (email, url)
                                        VALUES (?,?)"""
@@ -392,7 +481,7 @@ def create_focus_time():
     insert_query = """INSERT INTO focus_time (email, days_ago, hours)
                                        VALUES (?,?,?)"""
     for i in range(7):                                   
-        cur.execute(insert_query, ("queena1234@gmail.com", i, i))
+        cur.execute(insert_query, ("wongq9999@outlook.com", i, i))
     print("user added")
 
     conn.commit()
@@ -451,11 +540,15 @@ def graph(email):
 
     conn.close()
 
+    print(focus_time)
+
     #Get x-axis data
     days = []
     for i in range(7):
         d = today - DT.timedelta(days=(6-i))
         days.append(d.strftime("%m/%d"))
+
+    print(days)
 
     #Plot average line
     average = sum(focus_time) / len(focus_time)
@@ -471,7 +564,9 @@ def graph(email):
     plt.title('Past 7 Days Stats')
 
     #Save Graph
-    plt.savefig('Flask/static/Assets/graphs/'+username+'.png')
+    save_url = 'Assets/graphs/'+username+'.png'
+    plt.savefig('Flask/static/'+ save_url)
+    return save_url
 
 def get_username(email):
     conn = sql.connect("Flask/static/Databases/database.db")
@@ -485,6 +580,19 @@ def get_username(email):
     conn.close()
 
     return username
+
+def get_email(username):
+    conn = sql.connect("Flask/static/Databases/database.db")
+    cur = conn.cursor()
+
+    #get username
+    query = 'SELECT email FROM user WHERE username = ?'
+    cur.execute(query, (username,))
+    email = cur.fetchall()[0][0]
+
+    conn.close()
+
+    return email
 
 #USED FOR DEBUGGING
 def list_all():

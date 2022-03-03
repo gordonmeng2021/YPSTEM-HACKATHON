@@ -27,6 +27,7 @@
   .button1{
   display:block;
   margin:0.4em auto;
+
   }
   } 
 
@@ -34,7 +35,7 @@
     font-size: 100%;
     font-family: 'PT Sans', sans-serif;
     line-height: 1.5;
-    background:#13478b;
+    background:#808080;
     color: rgba(255,255,255,0.7);
     margin: 0;
     padding-bottom: 200px;
@@ -99,6 +100,7 @@
   }
   .fade {
     transition: all 0.5s;
+    font-size: 50px;
   }
   .fade.out {
     opacity: 0;
