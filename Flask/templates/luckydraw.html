@@ -8,23 +8,24 @@ Lucky Draw
 {% endblock %}
 
 <!-- this is just to remind of the name of var that i need to link to db: hours and imgpath -->
+<!-- this page have the cursed aspect ratio for puzzle: 510:310 -->
 
 {% block content %}
 <body>
   <section class="u-align-center u-clearfix u-image u-parallax u-shading u-section-1" id="carousel_bb64" data-image-width="1199" data-image-height="803">
     <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-      <div class="u-align-center u-container-style u-group u-group-1" data-animation-name="customAnimationIn" data-animation-duration="1000">
+      <div class="u-align-center u-container-style u-group u-group-1" > <!-- data-animation-name="customAnimationIn" data-animation-duration="1000"-->
         <div class="u-container-layout u-valign-middle">
-          <h3 class="u-custom-font u-font-montserrat u-text u-text-default u-text-1" data-animation-name="customAnimationIn" data-animation-duration="1750" data-animation-delay="500">EXCHANGE FOCUZ HOURS TO COMPLETE A PUZZLE</h3>
-          <h1 class="u-custom-font u-font-montserrat u-text u-text-default u-title u-text-2" data-animation-name="customAnimationIn" data-animation-duration="1750" data-animation-delay="0">HOURS SAVED: {{int_row}}</h1>
-          <p class="u-text u-text-3" data-animation-name="customAnimationIn" data-animation-duration="1750" data-animation-out="0" data-animation-direction="">Each piece of puzzle requires 20 hours of focuzed time. Try your luck to collect them all!</p>
+          <h3 class="u-custom-font u-font-montserrat u-text u-text-default u-text-1">EXCHANGE FOCUZ HOURS TO COMPLETE A PUZZLE</h3> <!-- data-animation-name="customAnimationIn" data-animation-duration="1750" data-animation-delay="500"-->
+          <h1 class="u-custom-font u-font-montserrat u-text u-text-default u-title u-text-2">HOURS SAVED: {{int_row}}</h1> <!--data-animation-name="customAnimationIn" data-animation-duration="1750" data-animation-delay="0"-->
+          <p class="u-text u-text-3">Each piece of puzzle requires 20 hours of focuzed time. Try your luck to collect them all!</p> <!--data-animation-name="customAnimationIn" data-animation-duration="1750" data-animation-out="0" data-animation-direction=""-->
         </div>
       </div>
-      <button type="button" class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-4-light-3 u-palette-4-light-1 u-radius-11 u-btn-1" data-animation-name="customAnimationIn" data-animation-duration="1750" data-animation-delay="500">Get a piece</button>
+      <button type="button" class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-4-light-3 u-palette-4-light-1 u-radius-11 u-btn-1">Get a piece</button> <!--data-animation-name="customAnimationIn" data-animation-duration="1750" data-animation-delay="500"-->
     </div>
   </section>
   <section class="u-clearfix u-gradient u-section-2" id="carousel_adab">
-    <h1 class="u-custom-font u-font-montserrat u-text u-text-default u-title u-text-1" data-animation-out="0">Your Collections</h1>
+    <h1 class="u-custom-font u-font-montserrat u-text u-text-default u-title u-text-1">Your Collections</h1>
     <div class="u-border-3 u-border-grey-dark-1 u-line u-line-horizontal u-line-1"></div>
     <div class="u-align-center u-container-style u-group u-group-1">
       <div class="u-container-layout">
@@ -51,7 +52,7 @@ Lucky Draw
             </div>
             <div class="u-effect-fade u-gallery-item u-shape-rectangle">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/puzzle1-T.jpg">
+                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
               </div>
               <div class="u-over-slide u-shading u-over-slide-3">
                 <h3 class="u-gallery-heading"></h3>
@@ -74,7 +75,7 @@ Lucky Draw
           <div class="u-gallery-inner u-gallery-inner-2">
             <div class="u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="">
+                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
               </div>
               <div class="u-over-slide u-shading u-over-slide-5">
                 <h3 class="u-gallery-heading"></h3>
@@ -83,7 +84,7 @@ Lucky Draw
             </div>
             <div class="u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="">
+                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
               </div>
               <div class="u-over-slide u-shading u-over-slide-6">
                 <h3 class="u-gallery-heading"></h3>
@@ -92,7 +93,7 @@ Lucky Draw
             </div>
             <div class="u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="">
+                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
               </div>
               <div class="u-over-slide u-shading u-over-slide-7">
                 <h3 class="u-gallery-heading"></h3>
@@ -101,7 +102,7 @@ Lucky Draw
             </div>
             <div class="u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="">
+                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
               </div>
               <div class="u-over-slide u-shading u-over-slide-8">
                 <h3 class="u-gallery-heading"></h3>
@@ -116,7 +117,7 @@ Lucky Draw
           <div class="u-gallery-inner u-gallery-inner-3">
             <div class="u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="">
+                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
               </div>
               <div class="u-over-slide u-shading u-over-slide-9">
                 <h3 class="u-gallery-heading"></h3>
@@ -125,7 +126,7 @@ Lucky Draw
             </div>
             <div class="u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="">
+                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
               </div>
               <div class="u-over-slide u-shading u-over-slide-10">
                 <h3 class="u-gallery-heading"></h3>
@@ -134,7 +135,7 @@ Lucky Draw
             </div>
             <div class="u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="">
+                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
               </div>
               <div class="u-over-slide u-shading u-over-slide-11">
                 <h3 class="u-gallery-heading"></h3>
@@ -143,7 +144,7 @@ Lucky Draw
             </div>
             <div class="u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="">
+                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
               </div>
               <div class="u-over-slide u-shading u-over-slide-12">
                 <h3 class="u-gallery-heading"></h3>
@@ -156,7 +157,7 @@ Lucky Draw
           <div class="u-gallery-inner u-gallery-inner-4">
             <div class="u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="">
+                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
               </div>
               <div class="u-over-slide u-shading u-over-slide-13">
                 <h3 class="u-gallery-heading"></h3>
@@ -165,7 +166,7 @@ Lucky Draw
             </div>
             <div class="u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="">
+                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
               </div>
               <div class="u-over-slide u-shading u-over-slide-14">
                 <h3 class="u-gallery-heading"></h3>
@@ -174,7 +175,7 @@ Lucky Draw
             </div>
             <div class="u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="">
+                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
               </div>
               <div class="u-over-slide u-shading u-over-slide-15">
                 <h3 class="u-gallery-heading"></h3>
@@ -183,7 +184,7 @@ Lucky Draw
             </div>
             <div class="u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="">
+                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
               </div>
               <div class="u-over-slide u-shading u-over-slide-16">
                 <h3 class="u-gallery-heading"></h3>
@@ -198,7 +199,7 @@ Lucky Draw
           <div class="u-gallery-inner u-gallery-inner-5">
             <div class="u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="">
+                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
               </div>
               <div class="u-over-slide u-shading u-over-slide-17">
                 <h3 class="u-gallery-heading"></h3>
@@ -207,7 +208,7 @@ Lucky Draw
             </div>
             <div class="u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="">
+                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
               </div>
               <div class="u-over-slide u-shading u-over-slide-18">
                 <h3 class="u-gallery-heading"></h3>
@@ -216,7 +217,7 @@ Lucky Draw
             </div>
             <div class="u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="">
+                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
               </div>
               <div class="u-over-slide u-shading u-over-slide-19">
                 <h3 class="u-gallery-heading"></h3>
@@ -225,7 +226,7 @@ Lucky Draw
             </div>
             <div class="u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="">
+                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
               </div>
               <div class="u-over-slide u-shading u-over-slide-20">
                 <h3 class="u-gallery-heading"></h3>
@@ -238,7 +239,7 @@ Lucky Draw
           <div class="u-gallery-inner u-gallery-inner-6">
             <div class="u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="">
+                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/puzzle-6-s.jpg">
               </div>
               <div class="u-over-slide u-shading u-over-slide-21">
                 <h3 class="u-gallery-heading"></h3>
@@ -247,7 +248,7 @@ Lucky Draw
             </div>
             <div class="u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="">
+                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/puzzle-6-a.jpg">
               </div>
               <div class="u-over-slide u-shading u-over-slide-22">
                 <h3 class="u-gallery-heading"></h3>
@@ -256,7 +257,7 @@ Lucky Draw
             </div>
             <div class="u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="">
+                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/puzzle-6-t.jpg">
               </div>
               <div class="u-over-slide u-shading u-over-slide-23">
                 <h3 class="u-gallery-heading"></h3>
@@ -265,7 +266,7 @@ Lucky Draw
             </div>
             <div class="u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="">
+                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/puzzle-6-c.jpg">
               </div>
               <div class="u-over-slide u-shading u-over-slide-24">
                 <h3 class="u-gallery-heading"></h3>
