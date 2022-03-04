@@ -17,51 +17,58 @@ Lucky Draw
       <div class="u-align-center u-container-style u-group u-group-1" > <!-- data-animation-name="customAnimationIn" data-animation-duration="1000"-->
         <div class="u-container-layout u-valign-middle">
           <h3 class="u-custom-font u-font-montserrat u-text u-text-default u-text-1">EXCHANGE FOCUZ HOURS TO COMPLETE A PUZZLE</h3> <!-- data-animation-name="customAnimationIn" data-animation-duration="1750" data-animation-delay="500"-->
-          <h1 class="u-custom-font u-font-montserrat u-text u-text-default u-title u-text-2">HOURS SAVED: {{int_row}}</h1> <!--data-animation-name="customAnimationIn" data-animation-duration="1750" data-animation-delay="0"-->
+          <h1 class="u-custom-font u-font-montserrat u-text u-text-default u-title u-text-2">HOURS SAVED: {{hours}}</h1> <!--data-animation-name="customAnimationIn" data-animation-duration="1750" data-animation-delay="0"-->
           <p class="u-text u-text-3">Each piece of puzzle requires 20 hours of focuzed time. Try your best to collect them all!</p> <!--data-animation-name="customAnimationIn" data-animation-duration="1750" data-animation-out="0" data-animation-direction=""-->
         </div>
       </div>
-      <button type="button" class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-4-light-3 u-palette-4-light-1 u-radius-11 u-btn-1">Get a piece</button> <!--data-animation-name="customAnimationIn" data-animation-duration="1750" data-animation-delay="500"-->
+      <form action="/draw">
+      <button type="submit" class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-4-light-3 u-palette-4-light-1 u-radius-11 u-btn-1">Get a piece</button> <!--data-animation-name="customAnimationIn" data-animation-duration="1750" data-animation-delay="500"-->
+      </form>
     </div>
   </section>
   <section class="u-clearfix u-gradient u-section-2" id="carousel_adab">
     <h1 class="u-custom-font u-font-montserrat u-text u-text-default u-title u-text-1">Your Collections</h1>
     <div class="u-border-3 u-border-grey-dark-1 u-line u-line-horizontal u-line-1"></div>
-    <div class="u-align-center u-container-style u-group u-group-1">
+    <div class="u-palette-1-base u-shape u-shape-rectangle u-shape-1"></div>
+    <div class="u-palette-1-base u-shape u-shape-rectangle u-shape-2"></div>
+    <div class="u-palette-1-base u-shape u-shape-rectangle u-shape-3"></div>
+    <div class="u-palette-1-base u-shape u-shape-rectangle u-shape-4"></div>
+    <div class="u-container-style u-group u-group-1">
       <div class="u-container-layout">
         <h2 class="u-align-center u-subtitle u-text u-text-2">Puzzle 1</h2>
+        <h2 class="u-align-center u-subtitle u-text u-text-3">Puzzle 2</h2>
         <div class="u-gallery u-layout-grid u-lightbox u-show-text-on-hover u-gallery-1">
           <div class="u-gallery-inner u-gallery-inner-1">
-            <div class="u-effect-fade u-gallery-item u-shape-rectangle">
+            <div class="u-border-1 u-border-black u-effect-fade u-gallery-item u-shape-rectangle">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src={{imgpath}}>
+                <img class="u-back-image u-expanded" src={{imgpath[0][0]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-1">
                 <h3 class="u-gallery-heading"></h3>
                 <p class="u-gallery-text"></p>
               </div>
             </div>
-            <div class="u-effect-fade u-gallery-item u-shape-rectangle">
+            <div class="u-border-1 u-border-black u-effect-fade u-gallery-item u-shape-rectangle">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/puzzle1-A.jpg">
+                <img class="u-back-image u-expanded" src={{imgpath[0][1]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-2">
                 <h3 class="u-gallery-heading"></h3>
                 <p class="u-gallery-text"></p>
               </div>
             </div>
-            <div class="u-effect-fade u-gallery-item u-shape-rectangle">
+            <div class="u-border-1 u-border-black u-effect-fade u-gallery-item u-shape-rectangle">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
+                <img class="u-back-image u-expanded" src={{imgpath[0][2]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-3">
                 <h3 class="u-gallery-heading"></h3>
                 <p class="u-gallery-text"></p>
               </div>
             </div>
-            <div class="u-effect-fade u-gallery-item u-shape-rectangle">
+            <div class="u-border-1 u-border-black u-effect-fade u-gallery-item u-shape-rectangle">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/puzzle1-C.jpg">
+                <img class="u-back-image u-expanded" src={{imgpath[0][3]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-4">
                 <h3 class="u-gallery-heading"></h3>
@@ -70,39 +77,39 @@ Lucky Draw
             </div>
           </div>
         </div>
-        <h2 class="u-align-center u-subtitle u-text u-text-3">Puzzle 2</h2>
+        <div class="u-palette-1-base u-shape u-shape-rectangle u-shape-5"></div>
         <div class="u-gallery u-layout-grid u-lightbox u-show-text-on-hover u-gallery-2">
           <div class="u-gallery-inner u-gallery-inner-2">
-            <div class="u-effect-fade u-gallery-item">
+            <div class="u-border-1 u-border-black u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
+                <img class="u-back-image u-expanded" src={{imgpath[1][0]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-5">
                 <h3 class="u-gallery-heading"></h3>
                 <p class="u-gallery-text"></p>
               </div>
             </div>
-            <div class="u-effect-fade u-gallery-item">
+            <div class="u-border-1 u-border-black u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
+                <img class="u-back-image u-expanded" src={{imgpath[1][1]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-6">
                 <h3 class="u-gallery-heading"></h3>
                 <p class="u-gallery-text"></p>
               </div>
             </div>
-            <div class="u-effect-fade u-gallery-item">
+            <div class="u-border-1 u-border-black u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
+                <img class="u-back-image u-expanded" src={{imgpath[1][2]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-7">
                 <h3 class="u-gallery-heading"></h3>
                 <p class="u-gallery-text"></p>
               </div>
             </div>
-            <div class="u-effect-fade u-gallery-item">
+            <div class="u-border-1 u-border-black u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
+                <img class="u-back-image u-expanded" src={{imgpath[1][3]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-8">
                 <h3 class="u-gallery-heading"></h3>
@@ -113,38 +120,40 @@ Lucky Draw
         </div>
         <h2 class="u-align-center u-subtitle u-text u-text-default u-text-4">Puzzle 3</h2>
         <h2 class="u-align-center u-subtitle u-text u-text-5">Puzzle 4</h2>
+        <!-- puzzle 4 -->
+        <div class="u-palette-1-base u-shape u-shape-rectangle u-shape-6"></div>
         <div class="u-gallery u-layout-grid u-lightbox u-show-text-on-hover u-gallery-3">
           <div class="u-gallery-inner u-gallery-inner-3">
-            <div class="u-effect-fade u-gallery-item">
+            <div class="u-border-1 u-border-black u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
+                <img class="u-back-image u-expanded" src={{imgpath[3][0]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-9">
                 <h3 class="u-gallery-heading"></h3>
                 <p class="u-gallery-text"></p>
               </div>
             </div>
-            <div class="u-effect-fade u-gallery-item">
+            <div class="u-border-1 u-border-black u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
+                <img class="u-back-image u-expanded" src={{imgpath[3][1]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-10">
                 <h3 class="u-gallery-heading"></h3>
                 <p class="u-gallery-text"></p>
               </div>
             </div>
-            <div class="u-effect-fade u-gallery-item">
+            <div class="u-border-1 u-border-black u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
+                <img class="u-back-image u-expanded" src={{imgpath[3][2]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-11">
                 <h3 class="u-gallery-heading"></h3>
                 <p class="u-gallery-text"></p>
               </div>
             </div>
-            <div class="u-effect-fade u-gallery-item">
+            <div class="u-border-1 u-border-black u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
+                <img class="u-back-image u-expanded" src={{imgpath[3][3]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-12">
                 <h3 class="u-gallery-heading"></h3>
@@ -153,38 +162,39 @@ Lucky Draw
             </div>
           </div>
         </div>
+        <!-- puzzle 3 -->
         <div class="u-gallery u-layout-grid u-lightbox u-show-text-on-hover u-gallery-4">
           <div class="u-gallery-inner u-gallery-inner-4">
-            <div class="u-effect-fade u-gallery-item">
+            <div class="u-border-1 u-border-grey-75 u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
+                <img class="u-back-image u-expanded" src={{imgpath[2][0]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-13">
                 <h3 class="u-gallery-heading"></h3>
                 <p class="u-gallery-text"></p>
               </div>
             </div>
-            <div class="u-effect-fade u-gallery-item">
+            <div class="u-border-1 u-border-grey-75 u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
+                <img class="u-back-image u-expanded" src={{imgpath[2][1]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-14">
                 <h3 class="u-gallery-heading"></h3>
                 <p class="u-gallery-text"></p>
               </div>
             </div>
-            <div class="u-effect-fade u-gallery-item">
+            <div class="u-border-1 u-border-grey-75 u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
+                <img class="u-back-image u-expanded" src={{imgpath[2][2]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-15">
                 <h3 class="u-gallery-heading"></h3>
                 <p class="u-gallery-text"></p>
               </div>
             </div>
-            <div class="u-effect-fade u-gallery-item">
+            <div class="u-border-1 u-border-grey-75 u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
+                <img class="u-back-image u-expanded" src={{imgpath[2][3]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-16">
                 <h3 class="u-gallery-heading"></h3>
@@ -195,38 +205,39 @@ Lucky Draw
         </div>
         <h2 class="u-align-center u-subtitle u-text u-text-default u-text-6">Puzzle 5</h2>
         <h2 class="u-align-center u-subtitle u-text u-text-7">Puzzle 6</h2>
+        <!-- puzzle 6 -->
         <div class="u-gallery u-layout-grid u-lightbox u-show-text-on-hover u-gallery-5">
           <div class="u-gallery-inner u-gallery-inner-5">
-            <div class="u-effect-fade u-gallery-item">
+            <div class="u-border-1 u-border-grey-75 u-effect-fade u-gallery-item u-shape-rectangle">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
+                <img class="u-back-image u-expanded" src={{imgpath[5][0]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-17">
                 <h3 class="u-gallery-heading"></h3>
                 <p class="u-gallery-text"></p>
               </div>
             </div>
-            <div class="u-effect-fade u-gallery-item">
+            <div class="u-border-1 u-border-grey-75 u-effect-fade u-gallery-item u-shape-rectangle">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
+                <img class="u-back-image u-expanded" src={{imgpath[5][1]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-18">
                 <h3 class="u-gallery-heading"></h3>
                 <p class="u-gallery-text"></p>
               </div>
             </div>
-            <div class="u-effect-fade u-gallery-item">
+            <div class="u-border-1 u-border-grey-75 u-effect-fade u-gallery-item u-shape-rectangle">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
+                <img class="u-back-image u-expanded" src={{imgpath[5][2]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-19">
                 <h3 class="u-gallery-heading"></h3>
                 <p class="u-gallery-text"></p>
               </div>
             </div>
-            <div class="u-effect-fade u-gallery-item">
+            <div class="u-border-1 u-border-grey-75 u-effect-fade u-gallery-item u-shape-rectangle">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/default-image.jpg">
+                <img class="u-back-image u-expanded" src={{imgpath[5][3]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-20">
                 <h3 class="u-gallery-heading"></h3>
@@ -235,38 +246,39 @@ Lucky Draw
             </div>
           </div>
         </div>
+        <!-- puzzle 5 -->
         <div class="u-gallery u-layout-grid u-lightbox u-show-text-on-hover u-gallery-6">
           <div class="u-gallery-inner u-gallery-inner-6">
-            <div class="u-effect-fade u-gallery-item">
+            <div class="u-border-1 u-border-grey-75 u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/puzzle-6-s.jpg">
+                <img class="u-back-image u-expanded" src={{imgpath[4][0]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-21">
                 <h3 class="u-gallery-heading"></h3>
                 <p class="u-gallery-text"></p>
               </div>
             </div>
-            <div class="u-effect-fade u-gallery-item">
+            <div class="u-border-1 u-border-grey-75 u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/puzzle-6-a.jpg">
+                <img class="u-back-image u-expanded" src={{imgpath[4][1]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-22">
                 <h3 class="u-gallery-heading"></h3>
                 <p class="u-gallery-text"></p>
               </div>
             </div>
-            <div class="u-effect-fade u-gallery-item">
+            <div class="u-border-1 u-border-grey-75 u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/puzzle-6-t.jpg">
+                <img class="u-back-image u-expanded" src={{imgpath[4][2]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-23">
                 <h3 class="u-gallery-heading"></h3>
                 <p class="u-gallery-text"></p>
               </div>
             </div>
-            <div class="u-effect-fade u-gallery-item">
+            <div class="u-border-1 u-border-grey-75 u-effect-fade u-gallery-item">
               <div class="u-back-slide">
-                <img class="u-back-image u-expanded" src="../static/Assets/luckydraw/puzzle-6-c.jpg">
+                <img class="u-back-image u-expanded" src={{imgpath[4][3]}}>
               </div>
               <div class="u-over-slide u-shading u-over-slide-24">
                 <h3 class="u-gallery-heading"></h3>
