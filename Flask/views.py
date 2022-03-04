@@ -181,9 +181,8 @@ def luckydraw():
     row = cur.fetchall()
     int_row = int(row[0][0])
     conn.commit()
-
     conn.close()
-    return render_template("luckydraw.html", int_row = int_row)
+    return render_template("luckydraw.html", int_row = int_row, imgpath= "../static/Assets/luckydraw/puzzle1-S.jpg")
 
 
 @app.route("/login/", methods = ['POST', 'GET'])
