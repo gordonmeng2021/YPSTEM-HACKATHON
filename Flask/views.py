@@ -1,5 +1,5 @@
 #Contains the routings and the view functions
-# from crypt import methods
+from crypt import methods
 import email
 import re
 from datetime import datetime
