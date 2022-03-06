@@ -93,10 +93,11 @@ hr {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  text-align: center;  
+  text-align: center; 
   height: 100vh;
   margin: 0px;
   padding: 0px;
+  min-width: 750px;
 }
 .tm-home-title,
  .tm-home-subtitle {
