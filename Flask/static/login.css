@@ -162,18 +162,18 @@ body {
 
 .form .button input {
   border: none;
-  color: #000;
+  color: black;
   font-size: 17px;
   font-weight: 500;
   letter-spacing: 1px;
   border-radius: 6px;
-  background-color: rgb(252, 213, 53);
+  background-color: #fd636d;
   cursor: pointer;
   transition: all 0.6s ease;
 }
 
 .button input:hover {
-  background-color: rgb(227, 193, 49);
+  background-color: #ff9299;
 }
 
 .form .login-signup {

@@ -258,6 +258,7 @@ body{
   position: absolute;
   right: 0;
   font-size: 15px;
+  background-color: #FF3946;
 }
 
 .website-add-list {
@@ -273,6 +274,7 @@ body{
 .website-add-list button {
   width: 19%;
   position: absolute;
+  background-color: #FF3946;
 }
 
 hr {

@@ -16,7 +16,7 @@ html, body {
   width: 100%;
   overflow-x: hidden;
 }
-h1,h2,h3 { font-weight: 300; }
+h1,h2,h3 { font-weight: 300; position: relative; top: 40px;}
 p { line-height: 28px; }
 hr {
   border-color: #f2f2f2;
@@ -84,7 +84,7 @@ hr {
   background-size: cover;
   background-attachment:fixed;
   background-position: center center;
-  color: #0b485a;
+  color: #ffffff;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -105,13 +105,13 @@ hr {
  }
 .tm-home-title { font-size: 60px; }
 .tm-home-subtitle {
-  color: #3db7e4;
+  color: #ff3946;
   font-weight: bold;
   padding-bottom: 40px;
   letter-spacing: 2px;
 }
 .tm-view-more-btn {
-  background: #3db7e4;
+  background: #ff3946;
   color: #ffffff;
   border: none;
   border-radius: 10px;

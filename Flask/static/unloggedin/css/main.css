@@ -187,6 +187,7 @@ p {
 .navbar-light .navbar-toggler {
   color: #314584;
   border: none;
+  max-width: 100%;
 }
 .navbar-toggler {
   padding: .5rem 1.2rem .25rem 0rem;
