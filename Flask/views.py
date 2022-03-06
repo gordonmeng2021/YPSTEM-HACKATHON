@@ -1,10 +1,12 @@
 #Contains the routings and the view functions
+from crypt import methods
 import email
 import re
 from datetime import datetime
 import json
 from sys import flags
 from tkinter import commondialog
+from random import randint
 
 from flask import Flask, render_template, request, flash
 
@@ -43,6 +45,15 @@ reroute = "127.0.0.1"
 #default
 user_username = "imcoolthanks"
 user_email = "wongq9999@outlook.com"
+
+pieces_owned = [
+    [0,0,0,0], #puzzle 1
+    [0,0,0,0], #puzzle 2
+    [0,0,0,0], #puzzle 3
+    [0,0,0,0], #puzzle 4
+    [0,0,0,0], #puzzle 5
+    [0,0,0,0]  #puzzle 6
+]
 
 @app.route("/focuz/")
 def focuz():
@@ -161,15 +172,23 @@ def stop():
     
     return render_template("home.html", int_focused_time = json.dumps(int_focused_time), int_not_focused_time = json.dumps(int_not_focused_time), user_username=user_username)
 
-@app.route("/puzzle/")
-def puzzle():
-    print("dfdfdfdfdfdfdf")
-    
-    return render_template("luckydraw.html",imgpath= "static/Assets/luckydraw/puzzle1-S.jpg")
+# getting the url of images
+def getimage(pieces_owned):
+    imgpath = []
+    for i in range(6):
+        temp = []
+        for j in range(4):
+            if pieces_owned[i][j]:
+                link = f"puzzle{i}-{j}"
+            else:
+                link = "default-image"
+            help = f"../static/Assets/luckydraw/{link}.jpg"
+            temp.append(help)
+        imgpath.append(temp)
+    return imgpath
 
-@app.route("/luckydraw/")
-def luckydraw():
-    #Inserting into database
+#getting the hours
+def hours_focuzed():
     conn = sql.connect("Flask/static/Databases/database.db")
     cur = conn.cursor()
 
@@ -179,10 +198,40 @@ def luckydraw():
     cur.execute(sum_time)
 
     row = cur.fetchall()
-    int_row = int(row[0][0])
+    hours = int(row[0][0])/3600
     conn.commit()
     conn.close()
-    return render_template("luckydraw.html", int_row = int_row, imgpath= "../static/Assets/luckydraw/puzzle1-S.jpg")
+    
+    # Testing if it works smoothly
+    # hours = 83
+
+    return hours
+
+# Draw a piece of puzzle
+@app.route("/draw")
+def draw_piece():
+    global pieces_owned
+    hours_available = hours_focuzed() - sum(sum(pieces_owned,[]))*20
+    if hours_available >= 20:
+        picture = randint(0,5)
+        position = randint(0,3)
+        while pieces_owned[picture][position]:
+            picture = randint(0,5)
+            position = randint(0,3)
+        pieces_owned[picture][position] = 1
+        hours_available -= 20
+    elif hours_available < 0:
+        hours_available = 0
+
+    return render_template("luckydraw.html", imgpath = getimage(pieces_owned), hours = round(hours_available,1))
+
+
+@app.route("/luckydraw/")
+def luckydraw():
+    global pieces_owned
+    hours_available = hours_focuzed() - sum(sum(pieces_owned,[]))*20
+
+    return render_template("luckydraw.html", hours = round(hours_available,1), imgpath = getimage(pieces_owned))
 
 
 @app.route("/login/", methods = ['POST', 'GET'])
