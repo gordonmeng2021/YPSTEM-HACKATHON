@@ -191,10 +191,8 @@ def hours_focuzed():
     conn = sql.connect("Flask/static/Databases/database.db")
     cur = conn.cursor()
 
-    query = "INSERT INTO focus_time VALUES (?,?,?)"
-    sum_time = "SELECT SUM(hours) FROM focus_time"
-    cur.execute(query, [user_email, 0 , focusedTime])
-    cur.execute(sum_time)
+    sum_time = "SELECT SUM(hours) FROM focus_time WHERE email = ?"
+    cur.execute(sum_time, (user_email,))
 
     row = cur.fetchall()
     hours = int(row[0][0])/3600
