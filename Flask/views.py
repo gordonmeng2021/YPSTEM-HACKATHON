@@ -240,7 +240,7 @@ def login():
         email = request.form.get('email') 
         password = request.form.get('password')
 
-        success = login(email, password)
+        success = _login(email, password)
         
         if success:
             user_username = get_username(email)
@@ -362,17 +362,17 @@ def create_users_info():
 
     conn.close()
 
-def login(email, password):
+def _login(email, password):
     conn = sql.connect("Flask/static/Databases/database.db")
     cur = conn.cursor()
 
     try:
         query = 'SELECT password FROM user WHERE email = ?'
         cur.execute(query, (email,))
+        true_password = cur.fetchall()[0][0]
     except:
         print("Invalid Email Address.")
-
-    true_password = cur.fetchall()[0][0]
+        return False
 
     conn.close()
 
