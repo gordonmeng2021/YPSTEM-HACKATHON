@@ -280,7 +280,7 @@ def unblock_or_block():
         username = row[0][0]
         email = row[0][1]
         pw = row[0][2]
-        int_time = int(row[0][3])
+        int_time = round(int(row[0][3])/3600,2)
         days_ago = row[0][4]
         icon_pic = row[0][5]
         #change to email
@@ -296,7 +296,7 @@ def unblock_or_block():
             new_website = request.form['website']
             add_blocked_website(user_email,new_website)
             website, username, email, pw, int_time, days_ago, icon_pic = get_user_data()
-            return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic )
+            return render_template("setting.html", website = website, username=username, email=email, password=pw, int_time = int_time, days_ago = days_ago, icon_pic = icon_pic)
 
         elif request.form['add_website'] == 'unblock_all':  #unblock all button
             print("Unblock all")
