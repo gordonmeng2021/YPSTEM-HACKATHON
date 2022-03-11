@@ -20,21 +20,22 @@ Home
 <body data-spy="scroll" data-target="#rock-navigation">
 	<!-- START HOME -->
 	<section id="home" class="templatemo-home">
-		<div class="container">
+		<div class="container home-container">
 			<div class="row">
-				<div class="col-md-2 col-sm-1"></div>
-				<div class="col-md-8 col-sm-10" >
-					<h1  class="tm-home-title"><strong>Welcome to Focuz, {{user_username}}</strong></h1>
-					<h2  class="tm-home-subtitle">Ready to focus?</h2>
-          <form  action="/focuz"  method="get"> <form action="/showmsg" method="get" >
-            <button onclick="myFunc()"class="btn btn-default smoothScroll tm-view-more-btn" >FOCUZ</button>
-          </form>
-          </form>
-          <form action="/stop" method="get"> 
-            <button onclick = "stop_msg({{int_focused_time}},{{int_not_focused_time}})" class="btn btn-default smoothScroll tm-view-more-btn" >STOP</button>
-          </form>
+				<h1  class="tm-home-title"><strong>Welcome to Focuz!</strong></h1>
+				<h2  class="tm-home-subtitle">@{{user_username}}</h2>
+			</div>
+			<div class="row">
+				<div class="col col-6" style="text-align: right;padding-right: 50px;">
+					<form action="/focuz"  method="get"> <form action="/showmsg" method="get" >
+						<button onclick="myFunc()"class="btn btn-default smoothScroll tm-view-more-btn" >FOCUZ</button>
+					</form>
 				</div>
-				<div class="col-md-2 col-sm-1"></div>
+				<div class="col col-6">
+					<form action="/stop" method="get" style="text-align: left;padding-left: 50px;"> 
+						<button onclick = "stop_msg({{int_focused_time}},{{int_not_focused_time}})" class="btn btn-default smoothScroll tm-view-more-btn" >STOP</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	</section>

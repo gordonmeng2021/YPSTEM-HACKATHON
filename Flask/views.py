@@ -246,6 +246,8 @@ def login():
             user_username = get_username(email)
             user_email = email
 
+            graph()
+
             return render_template("home.html", user_username = user_username)
         else:
             return render_template('login.html', error="Incorrect email or password.")
@@ -254,7 +256,7 @@ def login():
 
 @app.route("/dashboard/")
 def dashboard():
-    save_url = graph(user_email)
+    save_url = 'Assets/graphs/'+user_username+'.png'
     return render_template("dashboard.html", save_url=save_url)
     
 
@@ -526,18 +528,15 @@ def update_all_focus_time():
     conn.close()
 
 #graph
-def graph(email):    
+def graph():    
     today = DT.date.today()
 
     conn = sql.connect("Flask/static/Databases/database.db")
     cur = conn.cursor()
 
-    #get username
-    username = get_username(email)
-
     #get focus_time
     query = 'SELECT hours FROM focus_time WHERE email = ?'
-    cur.execute(query, (email,))
+    cur.execute(query, (user_email,))
     rows = cur.fetchall()
     focus_time = []
 
@@ -570,9 +569,8 @@ def graph(email):
     plt.title('Past 7 Days Stats')
 
     #Save Graph
-    save_url = 'Assets/graphs/'+username+'.png'
+    save_url = 'Assets/graphs/'+user_username+'.png'
     plt.savefig('Flask/static/'+ save_url)
-    return save_url
 
 def get_username(email):
     conn = sql.connect("Flask/static/Databases/database.db")

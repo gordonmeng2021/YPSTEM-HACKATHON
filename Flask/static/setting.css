@@ -179,7 +179,7 @@ a.list-group-item, .list-group-item-action {
 body{
   color: #1a202c;
   text-align: left;
-  background-color: #e2e8f0;    
+  background-color: #f5f9fc;    
 }
 .main-body {
   padding: 15px;
@@ -258,7 +258,6 @@ body{
   position: absolute;
   right: 0;
   font-size: 15px;
-  background-color: #FF3946;
 }
 
 .website-add-list {
