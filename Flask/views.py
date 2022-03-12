@@ -200,7 +200,7 @@ def hours_focuzed():
     conn.close()
     
     # Testing if it works smoothly
-    # hours = 83
+    hours = 83
 
     return hours
 
