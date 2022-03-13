@@ -1,10 +1,5 @@
 #Contains the routings and the view functions
-import email
-import re
-from datetime import datetime
 import json
-from sys import flags
-from tkinter import commondialog
 from random import randint
 
 from flask import Flask, render_template, request, flash
