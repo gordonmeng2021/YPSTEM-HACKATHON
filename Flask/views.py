@@ -200,7 +200,7 @@ def hours_focuzed():
     conn.close()
     
     # Testing if it works smoothly
-    hours = 83
+    hours = 200
 
     return hours
 
@@ -415,7 +415,7 @@ def create_blocked_website():
     cur = conn.cursor()
     insert_query = """INSERT INTO blocked_website (email, url)
                                        VALUES (?,?)"""
-    cur.execute(insert_query, ("wongq9999@outlook.com", "https://www.youtube.com/"))
+    cur.execute(insert_query, ("wongq9999@outlook.com", "www.netflix.com"))
     print("user added")
 
     conn.commit()
